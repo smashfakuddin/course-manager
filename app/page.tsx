@@ -1,3 +1,4 @@
+import AnimatedNav from "@/components/common/animateNav";
 import CourseCard from "@/components/common/CourseCard";
 import { courses } from "@/data/course";
 

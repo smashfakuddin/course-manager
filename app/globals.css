@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -119,4 +121,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.container{
+  @apply mx-auto max-w-6xl
 }
