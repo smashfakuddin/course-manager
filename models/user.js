@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema(
       enum: ["teacher", "student", "admin"],
       default: "user",
     },
+    semester: { type: Number, required: true },
   },
   { timestamps: true }
 );
