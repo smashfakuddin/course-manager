@@ -4,7 +4,8 @@ import Course from "@/models/course";
 export async function POST(request) {
   await dbConnect();
   try {
-    const { name, description, event, picked, resource } = await request.json();
+    const { name, description, event, picked, resource, credits, semester } =
+      await request.json();
 
     if (!name || !description) {
       return Response.json({
@@ -25,6 +26,8 @@ export async function POST(request) {
       event: event || [],
       picked: picked || null,
       resource: resource || [],
+      credits,
+      semester
     });
 
     return Response.json({
@@ -32,11 +35,7 @@ export async function POST(request) {
       course,
     });
   } catch (error) {
-    console.error(error);
-    return Response.json({
-      message: "Something went wrong",
-      error: error.message,
-    });
+    throw new Error(error.message);
   }
 }
 
@@ -44,6 +43,7 @@ export async function GET() {
   await dbConnect();
   try {
     const courses = await Course.find({});
+    console.log(courses)
     return Response.json({
       message: "Courses fetched successfully",
       courses,

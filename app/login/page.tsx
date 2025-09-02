@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 import { credentialLogin } from "@/app/actions/index";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function page() {
   const router = useRouter();
@@ -25,6 +26,26 @@ export default function page() {
   return (
     <div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <img
+          className="mx-auto h-10 w-auto"
+          src="https://www.svgrepo.com/show/301692/login.svg"
+          alt="Workflow"
+        />
+        <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+           login to your account
+        </h2>
+        <p className="mt-2 text-center text-sm leading-5 text-gray-500">
+          Or{" "}
+          <Link
+            href="/signup"
+            className="font-medium text-blue-600 hover:text-blue-500 transition ease-in-out duration-150"
+          >
+           
+            Create a new account
+          </Link>
+        </p>
+      </div>
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form onSubmit={handleSubmit}>
             {/* Full Name */}

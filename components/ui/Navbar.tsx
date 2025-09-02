@@ -11,7 +11,6 @@ type Props = {
   loginSession: Session | null;
 };
 const Navbar = ({ loginSession }: Props) => {
- 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -82,14 +81,6 @@ const Navbar = ({ loginSession }: Props) => {
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-2 lg:space-x-3">
             {loginSession ? (
-              //   <button
-              //     onClick={() => {
-              //       signOut();
-              //     }}
-              //     className="px-4 lg:px-6 py-1.5 lg:py-2 text-xs lg:text-sm font-medium bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition-all shadow-sm hover:shadow-lg transform hover:scale-105"
-              //   >
-              //     Sign Out
-              //   </button>
               <div className="relative">
                 {/* Avatar */}
                 <button
@@ -171,9 +162,42 @@ const Navbar = ({ loginSession }: Props) => {
                 </a>
               ))}
               <div className="pt-4 mt-2 border-t border-gray-200 dark:border-gray-700 flex flex-col space-y-2">
-                <button className="px-3 py-2.5 text-sm font-medium bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">
-                  Log In
-                </button>
+                {loginSession ? (
+                  <>
+                    <div className="flex items-center space-x-3 px-3">
+                      <div className="w-9 h-9 rounded-full overflow-hidden border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        <img
+                          src={
+                            loginSession.user?.image ||
+                            "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+                          }
+                          alt="User Avatar"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className=" leading-tight">
+                        <h2 className=" text-xl tracking-tight font-semibold">{loginSession.user?.name}</h2>
+                        <p className=" text-sm tracking-tight text-neutral-600 ">{loginSession.user?.email}</p>
+                      </div>
+                    </div>
+                     <button
+                      onClick={() => {
+                        signOut();
+                        setDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href={"/login"}
+                    className="px-3 py-2.5 text-sm font-medium bg-gray-900 text-white dark:bg-gray-50 dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+                  >
+                    Log In
+                  </Link>
+                )}
               </div>
             </div>
           </div>

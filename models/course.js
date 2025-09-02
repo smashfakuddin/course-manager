@@ -15,6 +15,8 @@ const courseSchema = new Schema(
       ref: "Resource",
       default: [],
     }, // array of resource links or IDs
+    semester: { type: Number, required: true },
+    credits: { type: Number, required: true },
   },
   { timestamps: true }
 );

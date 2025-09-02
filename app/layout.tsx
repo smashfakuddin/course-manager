@@ -9,6 +9,7 @@ import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import { dbConnect } from "@/db/dbconnect.js";
 import { log } from "console";
+import { redirect } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +33,6 @@ export default async function RootLayout({
 }>) {
   await dbConnect();
   const session = await auth();
-
   return (
     <html lang="en">
       <body
