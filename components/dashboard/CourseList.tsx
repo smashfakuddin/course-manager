@@ -1,5 +1,7 @@
 import { auth } from "@/auth";
 import CourseCard from "./CourseCard";
+import { toast } from "react-toastify";
+import { revalidateTag } from "next/cache";
 
 export default async function CourseList() {
   const session = await auth();
@@ -11,6 +13,7 @@ export default async function CourseList() {
         "Content-Type": "application/json",
       },
       cache: "no-store",
+      next: { tags: ["course"] },
     });
     if (response.ok) {
       const result = await response.json();
@@ -26,8 +29,6 @@ export default async function CourseList() {
     role: string
   ) => {
     "use server";
-
-    console.log("ids", courseId, teacherId, role);
     try {
       const response = await fetch(
         `${process.env.BASE_URL}/course/${courseId}/picked`,
@@ -45,12 +46,40 @@ export default async function CourseList() {
       }
 
       const result = await response.json();
-      console.log(result.message || "Course picked successfully");
+      revalidateTag("course");
     } catch (error) {
       console.error(error);
     }
   };
 
+  const handleUnpickCourse = async (
+    courseId: string,
+    teacherId: string,
+    role: string
+  ) => {
+    "use server";
+    try {
+      const response = await fetch(
+        `${process.env.BASE_URL}/course/${courseId}/picked`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: teacherId, role }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to unpick course");
+      }
+
+      const result = await response.json();
+      revalidateTag("course");
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <div>
       Available Courses will be listed here.
@@ -62,6 +91,7 @@ export default async function CourseList() {
               course={course}
               session={session}
               handlePickCourse={handlePickCourse}
+              handleUnpickCourse={handleUnpickCourse}
             />
           ))}
       </div>

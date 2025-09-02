@@ -12,15 +12,19 @@ interface CourseCardProps {
   };
   session: Session | null;
   handlePickCourse: (courseId: string, teacherId: string, role: string) => void;
+  handleUnpickCourse: (
+    courseId: string,
+    teacherId: string,
+    role: string
+  ) => void;
 }
 
 export default function CourseCard({
   course,
   session,
   handlePickCourse,
+  handleUnpickCourse,
 }: CourseCardProps) {
-
-  console.log(session)
   const handleEnroll = () => {
     console.log(`Enrolling in course ${course.name}`);
     // call API to enroll student
@@ -44,7 +48,21 @@ export default function CourseCard({
             Enroll
           </button>
         )}
-        {session?.user?.role === "teacher" && (
+        {session?.user?.role === "teacher" &&
+        session?.user?.id === course?.picked ? (
+          <button
+            onClick={() =>
+              handleUnpickCourse(
+                course?._id.toString(),
+                session?.user?.id,
+                session?.user?.role
+              )
+            }
+            className="px-3 py-1 bg-green-500 text-white rounded"
+          >
+            Unpick
+          </button>
+        ) : (
           <button
             onClick={() =>
               handlePickCourse(
@@ -55,7 +73,7 @@ export default function CourseCard({
             }
             className="px-3 py-1 bg-green-500 text-white rounded"
           >
-            {session?.user?.id === course.picked ? "Picked" : "Pick"}
+            Pick
           </button>
         )}
       </div>

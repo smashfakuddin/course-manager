@@ -43,7 +43,6 @@ export async function GET() {
   await dbConnect();
   try {
     const courses = await Course.find({});
-    console.log(courses)
     return Response.json({
       message: "Courses fetched successfully",
       courses,
