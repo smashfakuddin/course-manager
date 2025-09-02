@@ -11,8 +11,11 @@ const userSchema = new mongoose.Schema(
       default: "user",
     },
     semester: { type: Number, required: true },
+    courses: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Course", default: [] },
+    ],
   },
   { timestamps: true }
 );
 
-export default mongoose.models.User || mongoose.model("User", userSchema);
+export default mongoose.models.User ?? mongoose.model("User", userSchema);

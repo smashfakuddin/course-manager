@@ -1,5 +1,6 @@
 import { dbConnect } from "@/db/dbconnect";
 import Course from "@/models/course";
+import User from "@/models/user";
 
 export async function DELETE(request, { params }) {
   try {
@@ -54,7 +55,10 @@ export async function GET(request, { params }) {
       );
     }
 
-    const course = await Course.findById(id).populate(["event", "resource"]);
+    const course = await Course.findById(id)
+      .populate({ path: "enrolled", model: User, select: "name email" })
+      .populate({ path: "picked", model: User, select: "name email" });
+
     if (!course) {
       return Response.json({ message: "Course not found" }, { status: 404 });
     }
