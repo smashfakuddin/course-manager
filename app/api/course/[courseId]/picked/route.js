@@ -3,10 +3,8 @@ import Course from "@/models/course";
 
 export async function POST(request, { params }) {
   await dbConnect();
-  const { courseId } =await params;
+  const { courseId } = await params;
   const { userId, role } = await request.json();
-
-  console.log('from theapi', courseId, userId, role);
 
   if (role !== "teacher") {
     return new Response(
@@ -49,7 +47,6 @@ export async function POST(request, { params }) {
     );
   } catch (error) {}
 }
-
 
 export async function DELETE(request, { params }) {
   await dbConnect();
