@@ -53,7 +53,7 @@ export async function POST(request, { params }) {
 
 export async function DELETE(request, { params }) {
   await dbConnect();
-  const { courseId } = params;
+  const { courseId } = await params;
   const { userId, role } = await request.json();
 
   if (role !== "teacher") {

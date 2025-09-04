@@ -87,7 +87,7 @@ function MenuBar(): React.JSX.Element {
       whileHover="hover"
     >
       <motion.div
-        className="absolute -inset-2 rounded-3xl z-0 pointer-events-none"
+        className="absolute -inset-2 rounded-3xl pointer-events-none"
         style={{
           background: "radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(147,51,234,0.1) 50%, rgba(239,68,68,0.1) 100%)"
         }}
@@ -114,7 +114,7 @@ function MenuBar(): React.JSX.Element {
               {/* Front-facing menu item */}
               <motion.a
                 href={item.href}
-                className="flex items-center gap-2 px-4 py-2 relative z-10 bg-transparent text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors rounded-xl"
+                className="flex items-center gap-2 px-4 py-2 relative  bg-transparent text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors rounded-xl"
                 variants={itemVariants}
                 transition={sharedTransition}
                 style={{

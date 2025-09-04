@@ -24,8 +24,8 @@ export default function page() {
   }
 
   return (
-    <div>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="min-h-screen  flex flex-col justify-center items-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="mt-8 sm:mx-auto space-y-2 sm:w-full sm:max-w-md">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
           className="mx-auto h-10 w-auto"
@@ -45,8 +45,8 @@ export default function page() {
             Create a new account
           </Link>
         </p>
-      </div>
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      </div >
+        <div className="bg-white py-8  px-4 shadow sm:rounded-lg sm:px-10">
           <form onSubmit={handleSubmit}>
             {/* Full Name */}
 
