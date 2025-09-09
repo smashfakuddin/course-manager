@@ -8,3 +8,21 @@ export async function getPickedCoursesByUserId(userId) {
 
   return pickedCourses ? pickedCourses : [];
 }
+
+export async function pickCourse(courseId, userId) {
+  await dbConnect();
+
+  const course = await Course.findById(courseId);
+  if (!course) {
+    throw new Error("Course not found");
+  }
+
+  if (course.picked) {
+    return { success: false, message: "This course has already been picked" };
+  }
+
+  course.picked = userId;
+  await course.save();
+
+  return { success: true, message: "Course picked successfully", course };
+}

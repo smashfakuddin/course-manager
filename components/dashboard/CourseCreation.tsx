@@ -2,6 +2,7 @@
 import { useState } from "react";
 import CreateCourseModal from "./CreateCourseModal";
 import { toast } from "react-toastify";
+import { createCourse } from "@/db/queries/courses";
 
 export default function CourseCreation() {
   const [open, setOpen] = useState(false);
@@ -13,18 +14,10 @@ export default function CourseCreation() {
     credits: number;
   }) => {
     try {
-      const response = await fetch("/api/course", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: data && JSON.stringify(data),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to create course");
+      const response = await createCourse(data);
+      if (response.message) {
+        toast.success(response.message || "Course created successfully");
       }
-      const result = await response.json();
-      toast.success(result.message || "Course created successfully");
       setOpen(false);
     } catch (error) {
       toast.error((error as Error).message || "An error occurred");

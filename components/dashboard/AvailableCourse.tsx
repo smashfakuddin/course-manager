@@ -1,9 +1,11 @@
-import { BookOpen, PlusCircle } from "lucide-react";
+import { BookOpen, PlusCircle, TrashIcon } from "lucide-react";
 import { getAllAvailableCourses } from "@/db/queries/courses";
+import DeleteIcon from "@/icons/delete";
+import DeleteCourse from "./DeleteCourse";
 
 export default async function AvailableCourse({ session }: { session: any }) {
-
   const availableCourse = await getAllAvailableCourses(session?.user);
+  console.log("avaliable course", availableCourse);
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
@@ -11,31 +13,49 @@ export default async function AvailableCourse({ session }: { session: any }) {
         <BookOpen className="h-5 w-5 text-blue-600" />
         <span>Available Courses</span>
       </h2>
-      <ul className="space-y-3">
+      <div className="space-y-4">
         {availableCourse.map((course) => (
-          <li
+          <div
             key={course.id}
-            className="flex items-center justify-between bg-gray-50 p-3 rounded-md"
+            className="flex items-center justify-between bg-white border rounded-lg shadow-sm p-4"
           >
-            <span>{course.name}</span>
-            {course.picked ? (
-              <button
-                // onClick={() => handleUnpickCourse(course.title)}
-                className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200"
-              >
-                Unpick
-              </button>
-            ) : (
-              <button
-                // onClick={() => handlePickCourse(course.id, course.title)}
-                className="flex items-center px-3 py-1 text-sm bg-green-100 text-green-700 rounded hover:bg-green-200"
-              >
-                <PlusCircle className="h-4 w-4 mr-1" /> Pick
-              </button>
-            )}
-          </li>
+            {/* Course details */}
+            <div className="flex flex-col">
+              <span className="font-semibold text-lg">{course.name}</span>
+              <span className="text-sm text-gray-600">
+                Semester: {course.semester}
+              </span>
+              <span className="text-sm text-gray-600">
+                Credits: {course.credits}
+              </span>
+              <span className="text-sm text-gray-600">
+                Managed by:{" "}
+                <span className="font-medium">{course?.teacher || "N/A"}</span>
+              </span>
+            </div>
+
+            {/* Action button */}
+            <div className="flex items-center gap-2">
+              {course.picked ? (
+                <button
+                  // onClick={() => handleUnpickCourse(course.id)}
+                  className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200"
+                >
+                  Unpick
+                </button>
+              ) : (
+                <button
+                  // onClick={() => handlePickCourse(course.id)}
+                  className="btn-main flex items-center"
+                >
+                  <PlusCircle className="h-4 w-4 mr-1" /> Pick
+                </button>
+              )}
+             <DeleteCourse id={course.id}/>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

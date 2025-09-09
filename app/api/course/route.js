@@ -1,5 +1,6 @@
 import { dbConnect } from "@/db/dbconnect";
 import Course from "@/models/course";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request) {
   await dbConnect();
@@ -27,8 +28,10 @@ export async function POST(request) {
       picked: picked || null,
       resource: resource || [],
       credits,
-      semester
+      semester,
     });
+
+    revalidatePath("/dashboard");
 
     return Response.json({
       message: "Course created successfully",
