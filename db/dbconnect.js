@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const MONGO_URI = process.env.MONGO_URI;
-console.log("MONGO_URI:", MONGO_URI);
+
 
 if (!MONGO_URI) {
   throw new Error('Please define the MONGODB_URI environment variable');
@@ -22,7 +22,7 @@ export async function dbConnect() {
   }
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => {
+    cached.promise = mongoose.connect(MONGO_URI).then((mongoose) => {
       return mongoose;
     });
   }

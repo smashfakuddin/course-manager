@@ -1,9 +1,10 @@
-"use client";
-import { CheckCircle } from "lucide-react";
-import { useState } from "react";
 
-export default function PickedCourse() {
-  const [pickedCourses, setPickedCourses] = useState<string[]>([]);
+import { getPickedCoursesByUserId } from "@/db/queries/picked";
+import { CheckCircle } from "lucide-react";
+
+
+export default async function PickedCourse({ session }: { session: any }) {
+  const pickedCourses = await getPickedCoursesByUserId(session?.user?.id);
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
@@ -18,7 +19,7 @@ export default function PickedCourse() {
               key={index}
               className="flex items-center justify-between bg-gray-50 p-3 rounded-md"
             >
-              <span>{course}</span>
+              <span>{course.name}</span>
               <span className="text-sm text-green-600 font-medium">Picked</span>
             </li>
           ))}

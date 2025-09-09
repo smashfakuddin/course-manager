@@ -12,7 +12,7 @@ export default async function Dashboard() {
       <Welcome session={session} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <AvailableCourse session={session}/>
-        <PickedCourse />
+        <PickedCourse session={session}/>
       </div>
 
       {/* Extra Dashboard Segments */}

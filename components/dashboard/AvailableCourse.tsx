@@ -2,10 +2,11 @@ import { BookOpen, PlusCircle, TrashIcon } from "lucide-react";
 import { getAllAvailableCourses } from "@/db/queries/courses";
 import DeleteIcon from "@/icons/delete";
 import DeleteCourse from "./DeleteCourse";
+import PickAndUnpick from "./PickAndUnpick";
 
 export default async function AvailableCourse({ session }: { session: any }) {
   const availableCourse = await getAllAvailableCourses(session?.user);
-  console.log("avaliable course", availableCourse);
+  console.log(availableCourse);
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
@@ -30,28 +31,18 @@ export default async function AvailableCourse({ session }: { session: any }) {
               </span>
               <span className="text-sm text-gray-600">
                 Managed by:{" "}
-                <span className="font-medium">{course?.teacher || "N/A"}</span>
+                <span className="font-medium">{course?.picked?.name || "N/A"}</span>
               </span>
             </div>
 
             {/* Action button */}
             <div className="flex items-center gap-2">
-              {course.picked ? (
-                <button
-                  // onClick={() => handleUnpickCourse(course.id)}
-                  className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200"
-                >
-                  Unpick
-                </button>
-              ) : (
-                <button
-                  // onClick={() => handlePickCourse(course.id)}
-                  className="btn-main flex items-center"
-                >
-                  <PlusCircle className="h-4 w-4 mr-1" /> Pick
-                </button>
-              )}
-             <DeleteCourse id={course.id}/>
+              <PickAndUnpick
+                courseId={course._id.toString()}
+                picked={course.picked ? course.picked?._id.toString() : null}
+                userId={session?.user?.id}
+              />
+              <DeleteCourse id={course.id} />
             </div>
           </div>
         ))}
