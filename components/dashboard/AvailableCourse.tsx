@@ -3,6 +3,7 @@ import { getAllAvailableCourses } from "@/db/queries/courses";
 import DeleteIcon from "@/icons/delete";
 import DeleteCourse from "./DeleteCourse";
 import PickAndUnpick from "./PickAndUnpick";
+import Link from "next/link";
 
 export default async function AvailableCourse({ session }: { session: any }) {
   const availableCourse = await getAllAvailableCourses(session?.user);
@@ -16,13 +17,14 @@ export default async function AvailableCourse({ session }: { session: any }) {
       </h2>
       <div className="space-y-4 h-[50vh] overflow-y-scroll">
         {availableCourse.map((course) => (
+
           <div
-            key={course.id}
+            key={course._id.toString()}
             className="flex items-center justify-between bg-white border rounded-lg shadow-sm p-4"
           >
             {/* Course details */}
             <div className="flex flex-col">
-              <span className="font-semibold text-lg">{course.name}</span>
+              <Link href={`/courses/${course._id}`} className="font-semibold text-lg">{course.name}</Link>
               <span className="text-sm text-gray-600">
                 Semester: {course.semester}
               </span>

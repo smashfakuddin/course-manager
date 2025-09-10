@@ -1,6 +1,7 @@
 import { getEnrolledCourseByUser } from "@/db/queries/enroll";
 import { getPickedCoursesByUserId } from "@/db/queries/picked";
-import { CheckCircle } from "lucide-react";
+import { ArrowUpRight, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 export default async function PickedCourse({ session }: { session: any }) {
   let pickedCourses = [];
@@ -21,13 +22,13 @@ export default async function PickedCourse({ session }: { session: any }) {
       </h2>
       {pickedCourses.length > 0 ? (
         <ul className="space-y-3">
-          {pickedCourses.map((course, index) => (
+          {pickedCourses.map((course: any, index: number) => (
             <li
               key={index}
               className="flex items-center justify-between bg-gray-50 p-3 rounded-md"
             >
-              <span>{course.name}</span>
-              <span className="text-sm text-green-600 font-medium">Picked</span>
+              <Link href={`/courses/${course._id.toString()}`}>{course.name}</Link>
+              <Link href={`/courses/${course._id.toString()}`} className="text-sm text-green-600 font-medium btn-alt flex items-center gap-2">Explore Now <ArrowUpRight/></Link>
             </li>
           ))}
         </ul>
