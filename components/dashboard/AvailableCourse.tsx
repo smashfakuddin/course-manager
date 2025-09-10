@@ -44,6 +44,9 @@ export default async function AvailableCourse({ session }: { session: any }) {
                 picked={course.picked ? course.picked?._id.toString() : null}
                 userId={session?.user?.id}
                 role={session?.user?.role}
+                enrolled={course?.enrolled?.some(
+                  (id: { id: any }) => id.toString() === session?.user?.id
+                )}
               />
               {session?.user?.role === "admin" && (
                 <DeleteCourse id={course.id} />

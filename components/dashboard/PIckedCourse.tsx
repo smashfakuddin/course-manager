@@ -1,16 +1,23 @@
-
+import { getEnrolledCourseByUser } from "@/db/queries/enroll";
 import { getPickedCoursesByUserId } from "@/db/queries/picked";
 import { CheckCircle } from "lucide-react";
 
-
 export default async function PickedCourse({ session }: { session: any }) {
-  const pickedCourses = await getPickedCoursesByUserId(session?.user?.id);
+  let pickedCourses = [];
+  if (session?.user?.role === "teacher") {
+    pickedCourses = await getPickedCoursesByUserId(session?.user?.id);
+  } else if (session?.user?.role === "student") {
+    const response = await getEnrolledCourseByUser(session?.user?.id);
+    pickedCourses = response.courses;
+  }
 
   return (
     <div className="bg-white shadow rounded-lg p-6">
       <h2 className="text-xl font-semibold mb-4 flex items-center space-x-2">
         <CheckCircle className="h-5 w-5 text-green-600" />
-        <span>Picked Courses</span>
+        <span>
+          {session?.user?.role === "teacher" ? "Picked" : "Enrolled"} Courses
+        </span>
       </h2>
       {pickedCourses.length > 0 ? (
         <ul className="space-y-3">
@@ -25,7 +32,10 @@ export default async function PickedCourse({ session }: { session: any }) {
           ))}
         </ul>
       ) : (
-        <p className="text-gray-500">No courses picked yet.</p>
+        <p className="text-gray-500">
+          No courses {session?.user?.role === "teacher" ? "Picked" : "Enrolled"}{" "}
+          yet.
+        </p>
       )}
     </div>
   );
