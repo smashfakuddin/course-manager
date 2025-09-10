@@ -7,8 +7,14 @@ type Props = {
   courseId: string;
   picked: string | null;
   userId: string;
+  role: string;
 };
-export default function PickAndUnpick({ courseId, picked, userId }: Props) {
+export default function PickAndUnpick({
+  courseId,
+  picked,
+  userId,
+  role,
+}: Props) {
   const handlePickCourse = async (courseId: string, userId: string) => {
     try {
       const response = await pickCourse(courseId, userId);
@@ -33,21 +39,35 @@ export default function PickAndUnpick({ courseId, picked, userId }: Props) {
       }
     } catch (error) {}
   };
+
+  const handleEnroll = async () => {};
+
   return (
     <>
-      {picked === userId ? (
-        <button
-          onClick={() => handleUnpick(courseId, userId)}
-          className="btn-main flex items-center"
-        >
-          <MinusCircle className="h-4 w-4 mr-1" /> Unpick
-        </button>
+      {role !== "student" ? (
+        <div>
+          {picked === userId ? (
+            <button
+              onClick={() => handleUnpick(courseId, userId)}
+              className="btn-main flex items-center"
+            >
+              <MinusCircle className="h-4 w-4 mr-1" /> Unpick
+            </button>
+          ) : (
+            <button
+              onClick={() => handlePickCourse(courseId, userId)}
+              className="btn-main flex items-center"
+            >
+              <PlusCircle className="h-4 w-4 mr-1" /> Pick
+            </button>
+          )}
+        </div>
       ) : (
         <button
           onClick={() => handlePickCourse(courseId, userId)}
           className="btn-main flex items-center"
         >
-          <PlusCircle className="h-4 w-4 mr-1" /> Pick
+          <PlusCircle className="h-4 w-4 mr-1" /> Enroll
         </button>
       )}
     </>

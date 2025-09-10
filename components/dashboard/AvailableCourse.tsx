@@ -9,12 +9,12 @@ export default async function AvailableCourse({ session }: { session: any }) {
   console.log(availableCourse);
 
   return (
-    <div className="bg-white shadow rounded-lg p-6">
+    <div className="bg-white shadow rounded-lg p-6 ">
       <h2 className="text-xl font-semibold mb-4 flex items-center space-x-2">
         <BookOpen className="h-5 w-5 text-blue-600" />
         <span>Available Courses</span>
       </h2>
-      <div className="space-y-4">
+      <div className="space-y-4 h-[50vh] overflow-y-scroll">
         {availableCourse.map((course) => (
           <div
             key={course.id}
@@ -31,7 +31,9 @@ export default async function AvailableCourse({ session }: { session: any }) {
               </span>
               <span className="text-sm text-gray-600">
                 Managed by:{" "}
-                <span className="font-medium">{course?.picked?.name || "N/A"}</span>
+                <span className="font-medium">
+                  {course?.picked?.name || "N/A"}
+                </span>
               </span>
             </div>
 
@@ -41,8 +43,11 @@ export default async function AvailableCourse({ session }: { session: any }) {
                 courseId={course._id.toString()}
                 picked={course.picked ? course.picked?._id.toString() : null}
                 userId={session?.user?.id}
+                role={session?.user?.role}
               />
-              <DeleteCourse id={course.id} />
+              {session?.user?.role === "admin" && (
+                <DeleteCourse id={course.id} />
+              )}
             </div>
           </div>
         ))}

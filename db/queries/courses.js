@@ -3,29 +3,41 @@
 import { dbConnect } from "@/db/dbconnect.js";
 import Course from "@/models/course";
 import { revalidatePath } from "next/cache";
-import User from "@/models/user";
+
+// here is current running semester constant
+
+const currentSemester = [1, 3, 5, 7];
+// end here
 
 export async function getAllAvailableCourses(user) {
   await dbConnect();
   const { role, semester } = user;
   if (role === "teacher") {
-    const courses = await Course.find({}).populate({
+    const courses = await Course.find({ semester: { $in: currentSemester } }).populate({
       path: "picked",
       select: "name email",
     });
     return courses;
   } else if (role === "student") {
-    const courses = await Course.find({ semester: semester }).populate({
-      path: "picked",
-      select: "name email",
-    }).lean();
+    const courses = await Course.find({ semester: semester })
+      .populate({
+        path: "picked",
+        select: "name email",
+      })
+      .lean();
+    return courses;
+  } else if (role === "admin") {
+    const courses = await Course.find({})
+      .populate({
+        path: "picked",
+        select: "name email",
+      })
+      .lean();
     return courses;
   }
 
   return [];
 }
-
-// app/db/queries/courses.ts
 
 export async function createCourse(data) {
   await dbConnect();
