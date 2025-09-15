@@ -13,7 +13,9 @@ export async function getAllAvailableCourses(user) {
   await dbConnect();
   const { role, semester } = user;
   if (role === "teacher") {
-    const courses = await Course.find({ semester: { $in: currentSemester } }).populate({
+    const courses = await Course.find({
+      semester: { $in: currentSemester },
+    }).populate({
       path: "picked",
       select: "name email",
     });
@@ -39,6 +41,24 @@ export async function getAllAvailableCourses(user) {
   return [];
 }
 
+export async function getCourseById(courseId) {
+  console.log('id',courseId)
+  await dbConnect();
+
+  const courseDocs = await Course.findById(courseId)
+    .populate({
+      path: "picked",
+      select: "name email",
+    })
+    .populate({ path: "enrolled", select: "name email" }).lean();
+
+  if (!courseDocs) {
+    return { success: false, message: "Course Not Found" };
+  }
+  const courses = JSON.parse(JSON.stringify(courseDocs));
+  return courses;
+}
+
 export async function createCourse(data) {
   await dbConnect();
   const { name } = data;
@@ -62,5 +82,3 @@ export async function deleteCourse(courseId) {
 
   return { message: "Course deleted successfully" };
 }
-
-

@@ -17,6 +17,7 @@ const courseSchema = new Schema(
     }, // array of resource links or IDs
     semester: { type: Number, required: true },
     credits: { type: Number, required: true },
+    assignment:[{ type: mongoose.Schema.Types.ObjectId, ref: "Assignment" }]
   },
   { timestamps: true }
 );
