@@ -2,9 +2,21 @@
 
 import { useState } from "react";
 import { courseDetails } from "../../data/courseDetails";
+import { Edit2Icon } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function Banner({ courseDetails }: { courseDetails: any }) {
   const [expanded, setExpanded] = useState(false);
+  const role = "student";
+
+  const handleEdit=()=>{
+    if(role==="student"){
+      toast.error("Only Admin Can edit the Course Content");
+      return
+    }else if(role==='teacher'){
+      toast.success('you can edit')
+    }
+  }
 
   return (
     <div
@@ -74,8 +86,10 @@ export default function Banner({ courseDetails }: { courseDetails: any }) {
             <button className="bg-black px-4 py-2 text-white font-semibold flex items-center gap-2 rounded-lg hover:bg-gray-900 transition">
               Enroll Course
             </button>
-            <button className="border border-white px-4 py-2 text-white font-semibold flex items-center gap-2 rounded-lg hover:bg-white/20 transition">
-              Bookmark
+            <button
+            onClick={handleEdit}
+            className="border border-white px-4 py-2 text-white font-semibold flex items-center gap-2 rounded-lg hover:bg-white/20 transition">
+            <Edit2Icon className="w-4 h-4"/> Edit
             </button>
           </div>
         </div>

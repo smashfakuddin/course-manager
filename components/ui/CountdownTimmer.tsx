@@ -45,10 +45,10 @@ export default function Countdown({ targetDate }: CountdownProps) {
         { label: "Sec", value: timeLeft.seconds },
       ].map((item, index) => (
         <div key={index} className="flex flex-col items-center">
-          <span className="text-5xl font-bold text-blue-600">
+          <span className="text-xs font-bold text-blue-600">
             {String(item.value).padStart(2, "0")}
           </span>
-          <span className="uppercase text-sm text-gray-600">
+          <span className="uppercase text-xs text-gray-600">
             {item.label}
           </span>
         </div>
