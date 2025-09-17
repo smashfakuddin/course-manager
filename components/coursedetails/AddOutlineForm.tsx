@@ -7,6 +7,7 @@ export default function AddOutlineForm({
   outlineObject,
   onClose,
   onSubmit,
+
 }: {
   outlineObject?: Outline; // 👈 optional, if empty → Add mode
   onClose: () => void;
@@ -25,7 +26,7 @@ export default function AddOutlineForm({
 
     const payload = { title, description };
 
-    // onSubmit(payload, !!outlineObject); // 👈 send data + isEdit flag
+    onSubmit(payload, !!outlineObject); // 👈 send data + isEdit flag
     console.log(payload, !!outlineObject); // 👈 send data + isEdit flag
     onClose();
   };

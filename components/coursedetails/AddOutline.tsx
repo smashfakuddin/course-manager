@@ -2,21 +2,41 @@
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import Modal from "../common/Modal";
+import { addOutlineByCourse } from "@/db/queries/outline";
 import AddOutlineForm from "./AddOutlineForm";
+import { toast } from "react-toastify";
 
-export default function AddOutline() {
+type AddOutlineProps = {
+  courseId: string;
+};
+
+type Payload = {
+  title: string;
+  description: string;
+};
+export default function AddOutline({ courseId }: AddOutlineProps) {
   const [modalOpen, setModalOpen] = useState(false);
-  const outlineObject = {
-    id: crypto.randomUUID(),
-    title: "This is an awesome title",
-    description: "this is an awesome description",
-  };
 
   const handleModalOpen = () => {
     setModalOpen(true);
   };
   const handleModalClose = () => {
     setModalOpen(false);
+  };
+
+  const handleSubmit = async (payload: Payload, isEdit: boolean) => {
+    try {
+      const data = {
+        ...payload,
+        courseId,
+      };
+      const response = await addOutlineByCourse(data);
+      if (response.success) {
+        toast.success(response.message);
+      } else if (!response.success) {
+        toast.error(response.message);
+      }
+    } catch (error) {}
   };
   return (
     <>
@@ -28,7 +48,11 @@ export default function AddOutline() {
       </button>
       {modalOpen && (
         <Modal isOpen={modalOpen} onClose={handleModalClose}>
-          <AddOutlineForm outlineObject={undefined} onClose={handleModalClose} onSubmit={()=>{}}/>
+          <AddOutlineForm
+            outlineObject={undefined}
+            onClose={handleModalClose}
+            onSubmit={handleSubmit}
+          />
         </Modal>
       )}
     </>

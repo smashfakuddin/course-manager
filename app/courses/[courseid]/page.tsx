@@ -26,20 +26,11 @@ export default async function CourseIdPage({
         <div className=" col-span-2 space-y-4">
           {/* overview of the course design */}
           <Overview
-            overview={`
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta
-        accusantium eum corporis laboriosam nemo harum? Nemo provident
-        enim nobis illum rerum cupiditate at corporis fuga quo, iusto fugit quos
-        porro sunt quae harum, accusamus deserunt, possimus optio dolorum nulla
-
-        placeat numquam corrupti dolor delectus. Odio consectetur nobis
-        asperiores animi unde laudantium nulla, nostrum, delectus optio beatae
-        corrupti aspernatur deleniti autem doloribus at quibusdam dolor
-        officiis!`}
+            overview={''}
           />
           {/* Course outline with resourece */}
           <div className="">
-            <Outline />
+            <Outline courseId = {courseid}/>
           </div>
           {/* Discussion */}
           <div className="bg-white shadow rounded-2xl p-6">
