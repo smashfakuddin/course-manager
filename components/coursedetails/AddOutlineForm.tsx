@@ -1,5 +1,18 @@
-export default function AddOutlineForm({ outlineObject }: any) {
-  const { title, description } = outlineObject;
+type Outline = {
+  title: string;
+  description: string;
+};
+
+export default function AddOutlineForm({
+  outlineObject,
+  onClose,
+  onSubmit,
+}: {
+  outlineObject?: Outline; // 👈 optional, if empty → Add mode
+  onClose: () => void;
+  onSubmit: (data: Outline, isEdit: boolean) => void; // 👈 parent handles add/edit
+}) {
+  const { title = "", description = "" } = outlineObject || {};
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -10,13 +23,17 @@ export default function AddOutlineForm({ outlineObject }: any) {
       form.elements.namedItem("description") as HTMLInputElement
     )?.value;
 
-    console.log({ title, description }); // logs an object
+    const payload = { title, description };
+
+    // onSubmit(payload, !!outlineObject); // 👈 send data + isEdit flag
+    console.log(payload, !!outlineObject); // 👈 send data + isEdit flag
+    onClose();
   };
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
       <h2 className="text-center text-2xl font-semibold tracking-tighter">
-        Add Your Outline
+        {outlineObject ? "Edit Outline" : "Add Your Outline"}
       </h2>
 
       {/* Title */}
@@ -30,7 +47,7 @@ export default function AddOutlineForm({ outlineObject }: any) {
         <input
           type="text"
           id="title"
-          name="title" // 👈 IMPORTANT
+          name="title"
           defaultValue={title}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Title"
@@ -49,7 +66,7 @@ export default function AddOutlineForm({ outlineObject }: any) {
         <input
           type="text"
           id="description"
-          name="description" // 👈 IMPORTANT
+          name="description"
           defaultValue={description}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Description"
@@ -58,7 +75,7 @@ export default function AddOutlineForm({ outlineObject }: any) {
       </div>
 
       <button className="btn-main w-full" type="submit">
-        Add
+        {outlineObject ? "Update" : "Add"}
       </button>
     </form>
   );

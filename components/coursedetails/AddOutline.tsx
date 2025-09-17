@@ -28,7 +28,7 @@ export default function AddOutline() {
       </button>
       {modalOpen && (
         <Modal isOpen={modalOpen} onClose={handleModalClose}>
-          <AddOutlineForm outlineObject={outlineObject}/>
+          <AddOutlineForm outlineObject={undefined} onClose={handleModalClose} onSubmit={()=>{}}/>
         </Modal>
       )}
     </>
