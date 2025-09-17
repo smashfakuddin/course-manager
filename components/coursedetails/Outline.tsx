@@ -1,29 +1,21 @@
-import Video from "@/icons/Video";
+import { PlusIcon } from "lucide-react";
+
+import OutlineCard from "./OutlineCard";
 
 export default function Outline() {
   return (
-    <div className=" space-y-3">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <div key={index} className=" hover:bg-neutral-200 rounded-md p-2 cursor-pointer">
-           <div className="flex gap-3">
-            {/* Icon wrapper */}
-            <div className=" text-xl">
-              <Video />
-            </div>
-
-            {/* Content */}
-            <div>
-              <h3 className=" font-semibold text-gray-800">
-                Course Name {index + 1}
-              </h3>
-              <p className="text-sm text-gray-600 mt-1 leading-relaxed">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
-                ipsam esse. Praesentium facere a sit?
-              </p>
-            </div>
-          </div>
-        </div>
-      ))}
+    <div className="px-6 space-y-2 ">
+      <div className=" flex justify-between">
+        <h2 className=" text-xl font-semibold ">Outline Of The Course</h2>
+        <button className=" btn-main flex items-center gap-2">
+          <PlusIcon className="h-4 w-4" /> Add Outline
+        </button>
+      </div>
+      <div className=" space-y-3">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <OutlineCard index={index} />
+        ))}
+      </div>
     </div>
   );
 }

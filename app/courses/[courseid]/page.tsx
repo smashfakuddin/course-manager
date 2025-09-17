@@ -1,4 +1,7 @@
+
+import Announcement from "@/components/coursedetails/Announcement";
 import Banner from "@/components/coursedetails/Banner";
+import Exams from "@/components/coursedetails/Exams";
 import Outline from "@/components/coursedetails/Outline";
 import Overview from "@/components/coursedetails/Overview";
 import CountdownTimer from "@/components/ui/CountdownTimmer";
@@ -35,8 +38,7 @@ export default async function CourseIdPage({
         officiis!`}
           />
           {/* Course outline with resourece */}
-          <div className="px-6 space-y-2 ">
-            <h2 className=" text-xl font-semibold ">Outline Of The Course</h2>
+          <div className="">
             <Outline />
           </div>
           {/* Discussion */}
@@ -61,62 +63,11 @@ export default async function CourseIdPage({
             </div>
           </div>
         </div>
-        <div className=" col-span-1 space-y-3">
+        <div className="bg-white shadow rounded-2xl col-span-1 space-y-3">
           {/* Announcements */}
-          <div className="bg-white shadow rounded-2xl p-6 space-y-2">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
-              Announcements
-            </h2>
-            <div className="space-y-4">
-              <div className="border-l-4 border-blue-500 bg-blue-50 p-4 rounded">
-                <p className="font-medium text-gray-700">Assignment 1 Posted</p>
-                <p className="text-gray-600 text-sm mt-1">
-                  Submit your essay on cultural relativism by Sept 20.
-                </p>
-                <div className=" flex justify-between items-center">
-                  <button className="mt-2 text-sm text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded">
-                    Submit Assignment
-                  </button>
-                  <CountdownTimer
-                    targetDate={
-                      new Date(Date.now() + (24 + 2) * 60 * 60 * 1000)
-                    }
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <div className="border-l-4 border-blue-500 bg-blue-50 p-4 rounded">
-                <p className="font-medium text-gray-700">Assignment 1 Posted</p>
-                <p className="text-gray-600 text-sm mt-1">
-                  Submit your essay on cultural relativism by Sept 20.
-                </p>
-                <button className="mt-2 text-sm text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded">
-                  Submit Assignment
-                </button>
-              </div>
-            </div>
-          </div>
+          <Announcement/>
           {/* Exams */}
-          <div className="bg-white shadow rounded-2xl p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
-              Upcoming Exams
-            </h2>
-            <div className="space-y-4">
-              <div className="border border-gray-200 rounded-lg p-4">
-                <p className="font-medium text-gray-700">Midterm Exam</p>
-                <p className="text-gray-600 text-sm mt-1">
-                  October 15, 2025 | Covers Week 1 - Week 6
-                </p>
-              </div>
-              <div className="border border-gray-200 rounded-lg p-4">
-                <p className="font-medium text-gray-700">Final Exam</p>
-                <p className="text-gray-600 text-sm mt-1">
-                  December 20, 2025 | Covers Entire Course
-                </p>
-              </div>
-            </div>
-          </div>
+          <Exams/>
         </div>
       </div>
     </div>

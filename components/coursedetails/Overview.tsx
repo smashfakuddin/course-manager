@@ -21,9 +21,22 @@ export default function Overview({ overview }: props) {
       <div className=" flex justify-between items-center">
         <h2 className=" text-2xl tracking-tighter font-semibold">Overview</h2>
         {isEdit ? (
-          <Save onClick={handleSave} className="h-6 w-6" />
+          <button
+            onClick={handleSave}
+            className="btn-main flex items-center gap-2"
+          >
+            <Save className="h-4 w-4" />
+            Save{" "}
+          </button>
         ) : (
-          <Edit onClick={handleEdit} className="h-6 w-6" />
+            <button
+            onClick={handleEdit}
+            className="btn-main flex items-center gap-2"
+          >
+            <Edit  className="h-4 w-4" />
+            Edit{" "}
+          </button>
+          
         )}
       </div>{" "}
       {isEdit ? (
