@@ -27,7 +27,8 @@ export default async function CourseIdPage({
         <div className=" col-span-2 space-y-4">
           {/* overview of the course design */}
           <Overview
-            overview={''}
+            overview={courseDetails?.overview}
+            courseId={courseDetails?._id.toString()}
           />
           {/* Course outline with resourece */}
           <div className="">

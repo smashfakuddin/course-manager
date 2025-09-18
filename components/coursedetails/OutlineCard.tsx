@@ -10,9 +10,8 @@ import {
 } from "lucide-react";
 import Video from "@/icons/Video";
 import Resource from "./Resource";
-import Delete from "@/icons/delete";
 import { addOutlineByCourse, deleteOutline } from "@/db/queries/outline";
-import {addResourceByOutline} from '@/db/queries/resource'
+import { addResourceByOutline } from "@/db/queries/resource";
 import { toast } from "react-toastify";
 import Modal from "../common/Modal";
 import AddResourceForm from "./AddResourceForm";
@@ -21,6 +20,7 @@ export type Outline = {
   title: string;
   description: string;
   _id: string;
+  resource:Array<object>;
 };
 
 export default function OutlineCard({
@@ -38,9 +38,7 @@ export default function OutlineCard({
   const handleModalOpen = () => {
     setModalOpen(true);
   };
-  const handleEdit = () => {
-
-  };
+  const handleEdit = () => {};
 
   const handleDelete = async () => {
     try {
@@ -55,17 +53,19 @@ export default function OutlineCard({
     try {
       const data = {
         ...payload,
-        outlineId:outline._id.toString(),
+        outlineId: outline._id.toString(),
       };
 
       const response = await addResourceByOutline(data);
-      // if (response.success) {
-      //   toast.success(response.message);
-      // } else if (!response.success) {
-      //   toast.error(response.message);
-      // }
+      if (response.success) {
+        toast.success(response.message);
+      } else if (!response.success) {
+        toast.error(response.message);
+      }
     } catch (error) {}
   };
+
+
   return (
     <div className="border border-gray-200 rounded-lg ">
       <h2>
@@ -82,7 +82,7 @@ export default function OutlineCard({
             <Video />
             <span>{outline.title}</span>
             <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">
-              3
+              {outline.resource.length >0? `${outline.resource.length} Resources`:'Nothing Added yet'}
             </span>
             <div className="relative group">
               <button
@@ -147,7 +147,7 @@ export default function OutlineCard({
       {/* Dropdown content */}
       {open && (
         <div className="p-4 text-gray-600 text-sm leading-relaxed border-b border-gray-200">
-          <Resource />
+          <Resource resources = {outline?.resource} outlineId={outline._id.toString()}/>
         </div>
       )}
       {/* resource adding modal */}
