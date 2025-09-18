@@ -9,7 +9,7 @@ type OutlineProps = {
 };
 
 export default function Outline({ courseId, outlines }: OutlineProps) {
-  console.log("outline", outlines);
+
   return (
     <div className="px-6 space-y-2 ">
       <div className=" flex justify-between">

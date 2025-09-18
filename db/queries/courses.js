@@ -42,7 +42,7 @@ export async function getAllAvailableCourses(user) {
 }
 
 export async function getCourseById(courseId) {
-  console.log('id',courseId)
+
   await dbConnect();
 
   const courseDocs = await Course.findById(courseId)
@@ -50,7 +50,14 @@ export async function getCourseById(courseId) {
       path: "picked",
       select: "name email",
     })
-    .populate({ path: "enrolled", select: "name email" }).populate({ path: "outline",  }).lean();
+    .populate({ path: "enrolled", select: "name email" })
+    .populate({
+      path: "outline",
+      populate: {
+        path: "resource", // 👈 nested populate
+      },
+    })
+    .lean();
 
   if (!courseDocs) {
     return { success: false, message: "Course Not Found" };

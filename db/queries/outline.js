@@ -14,7 +14,7 @@ export async function addOutlineByCourse(data) {
 
   try {
     const outline = await Outline.create({ title, description });
-    console.log("outline", outline);
+
     const course = await Course.findById(courseId);
     course.outline.push(outline._id);
 

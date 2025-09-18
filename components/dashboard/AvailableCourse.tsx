@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default async function AvailableCourse({ session }: { session: any }) {
   const availableCourse = await getAllAvailableCourses(session?.user);
-  console.log(availableCourse);
+
 
   return (
     <div className="bg-white shadow rounded-lg p-6 ">

@@ -1,11 +1,21 @@
 "use client";
 import { useState } from "react";
-import { ChevronUp, ChevronDown, Edit2, DeleteIcon, Trash } from "lucide-react";
+import {
+  ChevronUp,
+  ChevronDown,
+  Edit2,
+  DeleteIcon,
+  Trash,
+  PlusIcon,
+} from "lucide-react";
 import Video from "@/icons/Video";
 import Resource from "./Resource";
 import Delete from "@/icons/delete";
-import { deleteOutline } from "@/db/queries/outline";
+import { addOutlineByCourse, deleteOutline } from "@/db/queries/outline";
+import {addResourceByOutline} from '@/db/queries/resource'
 import { toast } from "react-toastify";
+import Modal from "../common/Modal";
+import AddResourceForm from "./AddResourceForm";
 
 export type Outline = {
   title: string;
@@ -21,21 +31,43 @@ export default function OutlineCard({
   courseId: string;
 }) {
   const [open, setOpen] = useState(false);
-
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
   const handleEdit = () => {
-    console.log("i am clicked");
+
   };
 
   const handleDelete = async () => {
     try {
-      const response = await deleteOutline(outline._id.toString(),courseId);
-      if(response.success){
-        toast.success(response.message)
+      const response = await deleteOutline(outline._id.toString(), courseId);
+      if (response.success) {
+        toast.success(response.message);
       }
     } catch (error) {}
   };
+
+  const handleResourceSubmit = async (payload: any) => {
+    try {
+      const data = {
+        ...payload,
+        outlineId:outline._id.toString(),
+      };
+
+      const response = await addResourceByOutline(data);
+      // if (response.success) {
+      //   toast.success(response.message);
+      // } else if (!response.success) {
+      //   toast.error(response.message);
+      // }
+    } catch (error) {}
+  };
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
+    <div className="border border-gray-200 rounded-lg ">
       <h2>
         <div
           className={`flex cursor-pointer items-center justify-between w-full p-4 font-medium text-gray-700 border-b border-gray-200 hover:bg-gray-100 gap-3 ${
@@ -52,26 +84,47 @@ export default function OutlineCard({
             <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">
               3
             </span>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation(); // don’t toggle
-                handleEdit();
-              }}
-              className="text-gray-500 hover:text-blue-600 cursor-pointer"
-            >
-              <Edit2 className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation(); // don’t toggle
-                handleDelete();
-              }}
-              className="text-gray-500 hover:text-blue-600 cursor-pointer"
-            >
-              <Trash className="w-4 h-4" />
-            </button>
+            <div className="relative group">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation(); // don’t toggle
+                  handleModalOpen();
+                }}
+                className="text-gray-500 hover:text-blue-600 cursor-pointer"
+              >
+                <PlusIcon className="w-4 h-4" />
+              </button>
+
+              {/* Tooltip */}
+              <span
+                className="absolute -top-8 left-1/2 -translate-x-1/2 
+                   scale-0 group-hover:scale-100 transition-transform
+                   rounded-md bg-gray-800 text-white text-xs px-2 py-1 text-nowrap"
+              >
+                Add Resource for this outline
+              </span>
+            </div>
+
+            <div className="relative group">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation(); // don’t toggle
+                  handleDelete();
+                }}
+                className="text-gray-500 hover:text-red-600 cursor-pointer"
+              >
+                <Trash className="w-4 h-4" />
+              </button>
+              <span
+                className="absolute -top-8 left-1/2 -translate-x-1/2 
+                   scale-0 group-hover:scale-100 transition-transform
+                   rounded-md bg-gray-800 text-white text-xs px-2 py-1 text-nowrap"
+              >
+                Delete This Outline
+              </span>
+            </div>
           </div>
 
           {/* Right side (edit + chevron) */}
@@ -97,6 +150,13 @@ export default function OutlineCard({
           <Resource />
         </div>
       )}
+      {/* resource adding modal */}
+      <Modal isOpen={modalOpen} onClose={handleModalClose}>
+        <AddResourceForm
+          onClose={handleModalClose}
+          onSubmit={handleResourceSubmit}
+        />
+      </Modal>
     </div>
   );
 }
