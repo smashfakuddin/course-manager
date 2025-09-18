@@ -50,7 +50,7 @@ export async function getCourseById(courseId) {
       path: "picked",
       select: "name email",
     })
-    .populate({ path: "enrolled", select: "name email" }).lean();
+    .populate({ path: "enrolled", select: "name email" }).populate({ path: "outline",  }).lean();
 
   if (!courseDocs) {
     return { success: false, message: "Course Not Found" };

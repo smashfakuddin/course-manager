@@ -15,6 +15,7 @@ export default async function CourseIdPage({
   const { courseid } = await params;
 
   const courseDetails = await getCourseById(courseid);
+  console.log(courseDetails)
 
   return (
     <div>
@@ -30,7 +31,7 @@ export default async function CourseIdPage({
           />
           {/* Course outline with resourece */}
           <div className="">
-            <Outline courseId = {courseid}/>
+            <Outline courseId = {courseid} outlines={courseDetails?.outline}/>
           </div>
           {/* Discussion */}
           <div className="bg-white shadow rounded-2xl p-6">
