@@ -1,5 +1,5 @@
 "use client";
-import { Edit, Save } from "lucide-react";
+import { Edit, PlusIcon, Save } from "lucide-react";
 import { useState } from "react";
 import { addOrUpdateOverview } from "@/db/queries/overview";
 import { toast } from "react-toastify";
@@ -24,7 +24,6 @@ export default function Overview({ overview, courseId }: props) {
     } else if (!response.success) {
       toast.error(response.message);
     }
-    console.log(response);
     handleEdit();
   };
   return (
@@ -49,16 +48,25 @@ export default function Overview({ overview, courseId }: props) {
           </button>
         )}
       </div>{" "}
-      {isEdit ? (
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className="border border-neutral-300 rounded-md p-3 w-full"
-          rows={10}
-        />
-      ) : (
-        <p className="whitespace-pre-line text-justify">{text}</p>
-      )}
+      <div className="min-h-[120px]">
+        {isEdit ? (
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Write an overview about this course..."
+            className="w-full rounded-lg border border-gray-300 p-3 text-sm text-gray-700 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 transition resize-none"
+            rows={8}
+          />
+        ) : text ? (
+          <p className="whitespace-pre-line text-gray-700 leading-relaxed text-justify">
+            {text}
+          </p>
+        ) : (
+          <div className="flex items-center justify-center text-center h-[100px] text-gray-400 text-base italic">
+            Nothing here yet — click Edit to add an Overview.
+          </div>
+        )}
+</div>
     </div>
   );
 }

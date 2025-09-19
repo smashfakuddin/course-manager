@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 export async function addOrUpdateOverview(courseId, overview) {
   await dbConnect();
   try {
-    if (!courseId || !overview) {
+    if (!courseId) {
       return { success: false, message: "Course ID and overview are required" };
     }
 
@@ -17,7 +17,6 @@ export async function addOrUpdateOverview(courseId, overview) {
       return { success: false, message: "Course not found" };
     }
 
-    console.log("course new",course)
     course.overview = overview; // 👈 update or add overview
     await course.save();
 

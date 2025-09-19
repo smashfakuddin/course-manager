@@ -8,7 +8,7 @@ type ResourceProps = {
   url: string;
 };
 export default function Resource({ resources, outlineId }: any) {
-  console.log(outlineId);
+
   const handleDeleteResource = async (resourceId: string) => {
     try {
       const response = await deleteResourceById(resourceId, outlineId);
@@ -19,6 +19,7 @@ export default function Resource({ resources, outlineId }: any) {
       }
     } catch (error) {}
   };
+  
   return (
     <ul className="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
       {resources.length > 0 ? (

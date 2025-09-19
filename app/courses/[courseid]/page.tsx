@@ -15,7 +15,7 @@ export default async function CourseIdPage({
   const { courseid } = await params;
 
   const courseDetails = await getCourseById(courseid);
-  console.log(courseDetails)
+  // console.log(courseDetails)
 
   return (
     <div>
