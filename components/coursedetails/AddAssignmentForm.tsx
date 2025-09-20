@@ -1,29 +1,40 @@
-export default function AddResourceForm({
+"use client";
+import { createAssignment } from "@/db/queries/assignment";
+import { useParams } from "next/navigation";
+import { toast } from "react-toastify";
+
+export default function AddAssignmentForm({
   onClose,
   onSubmit,
 }: {
   onClose: () => void;
   onSubmit: (data: any) => void; // 👈 parent handles add/edit
 }) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
+  const params = useParams();
 
-    const title = (form.elements.namedItem("title") as HTMLInputElement)?.value;
-    const url = (form.elements.namedItem("url") as HTMLInputElement)?.value;
-    const description = (
-      form.elements.namedItem("description") as HTMLInputElement
-    )?.value;
-
-    const payload = { title, url, description };
-
-    onSubmit(payload);
-    onClose();
+  const handleSubmit = async (formData: FormData) => {
+    const data: Record<string, any> = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+    try {
+      const response = await createAssignment(params.courseid, data);
+      console.log(response)
+      if (response?.success) {
+        toast.success(response.message);
+      } else if (!response?.success) {
+        toast.error(response?.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }finally{
+      onClose()
+    }
   };
   return (
-    <form className="space-y-4" onSubmit={handleSubmit}>
+    <form className="space-y-4" action={handleSubmit}>
       <h2 className="text-center text-2xl font-semibold tracking-tighter">
-        Add Resource for Omuk
+        Add Assignment
       </h2>
 
       {/* Title */}
@@ -32,7 +43,7 @@ export default function AddResourceForm({
           htmlFor="title"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Resource Title
+          Assignment Title
         </label>
         <input
           type="text"
@@ -63,18 +74,16 @@ export default function AddResourceForm({
       </div>
       <div>
         <label
-          htmlFor="url"
+          htmlFor="submissionDate"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Resource Url
+          Submission Date
         </label>
         <input
-          type="text"
-          id="url"
-          name="url"
+          type="datetime-local"
+          name="submissionDate"
+          id="submissionDate"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="e.g https://drive.google.com/your-resource"
-          required
         />
       </div>
 

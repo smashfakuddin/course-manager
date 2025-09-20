@@ -4,9 +4,10 @@ const { Schema, model, models } = mongoose;
 
 const assignmentSchema = new Schema(
   {
-    name: { type: String, required: true, unique: true },
+    title: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     submissionDate: { type: Date, require: true },
+    submission: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

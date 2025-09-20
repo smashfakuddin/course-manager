@@ -1,9 +1,9 @@
+import AddExams from "./AddExams"
+
 export default function Exams() {
   return (
     <div className="rounded-2xl p-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">
-        Upcoming Exams
-      </h2>
+      <AddExams/>
       <div className="space-y-4">
         <div className="border border-gray-200 rounded-lg p-4">
           <p className="font-medium text-gray-700">Midterm Exam</p>

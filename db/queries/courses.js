@@ -42,7 +42,6 @@ export async function getAllAvailableCourses(user) {
 }
 
 export async function getCourseById(courseId) {
-
   await dbConnect();
 
   const courseDocs = await Course.findById(courseId)
@@ -57,6 +56,7 @@ export async function getCourseById(courseId) {
         path: "resource", // 👈 nested populate
       },
     })
+    .populate({ path: "assignment" })
     .lean();
 
   if (!courseDocs) {
