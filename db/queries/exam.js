@@ -31,6 +31,30 @@ export async function createExam(courseId, data) {
   }
 }
 
+export async function editExam(courseId, data, examId) {
+  await dbConnect();
+
+  try {
+    const exam = await Exam.findById(examId);
+    if (!exam) {
+      return { success: false, message: "Exam not found" };
+    }
+
+    // 3. Update fields
+    exam.title = data.title ?? exam.title;
+    exam.description = data.description ?? exam.description;
+    exam.date = data.date ? new Date(data.date) : exam.date;
+
+    await exam.save();
+
+    // 4. Revalidate cache
+    revalidatePath(`/courses/${courseId}`);
+
+    return { success: true, message: "Exam updated successfully" };
+  } catch (error) {
+    return { success: false, message: "Something went wrong" };
+  }
+}
 export async function deleteExamById(examId, courseId) {
   await dbConnect();
   try {

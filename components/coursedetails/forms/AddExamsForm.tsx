@@ -1,25 +1,42 @@
 "use client";
-import { createExam } from "@/db/queries/exam";
+import { createExam, editExam } from "@/db/queries/exam";
 import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 
+type Exam = {
+  _id: string;
+  title: string;
+  description: string;
+  date: Date | string;
+};
+
 export default function AddExamsForm({
   onClose,
-  onSubmit,
+  exam,
+  isEdit,
 }: {
   onClose: () => void;
-  onSubmit: (data: any) => void;
+  exam?: Exam;
+  isEdit: boolean;
 }) {
   const params = useParams();
 
   const handleSubmit = async (formData: FormData) => {
+    
     const data: Record<string, any> = {};
     formData.forEach((value, key) => {
       data[key] = value;
     });
+
     try {
-      const response = await createExam(params.courseid, data);
-      console.log(response);
+
+      let response;
+      if (!isEdit) {
+        response = await createExam(params.courseid, data);
+      } else if (isEdit) {
+        response = await editExam(params.courseid, data, exam?._id.toString());
+      }
+
       if (response?.success) {
         toast.success(response.message);
       } else if (!response?.success) {
@@ -34,7 +51,7 @@ export default function AddExamsForm({
   return (
     <form className="space-y-4" action={handleSubmit}>
       <h2 className="text-center text-2xl font-semibold tracking-tighter">
-        Add Events
+        {isEdit ? "Edit" : "Add"} Events
       </h2>
 
       {/* Title */}
@@ -49,6 +66,7 @@ export default function AddExamsForm({
           type="text"
           id="title"
           name="title"
+          defaultValue={exam?.title}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Introduction To The Anp"
           required
@@ -67,6 +85,7 @@ export default function AddExamsForm({
           type="text"
           id="description"
           name="description"
+          defaultValue={exam?.description}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="e.g Awesome Course Detail"
           required
@@ -83,7 +102,15 @@ export default function AddExamsForm({
           type="datetime-local"
           name="date"
           id="date"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          defaultValue={
+            exam?.date
+              ? new Date(exam.date).toISOString().slice(0, 16) // "2025-12-20T14:30"
+              : ""
+          }
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+             focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
+             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
       </div>
 
