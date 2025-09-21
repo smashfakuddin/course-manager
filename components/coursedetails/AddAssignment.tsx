@@ -2,7 +2,7 @@
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import Modal from "../common/Modal";
-import AddAssignmentForm from "./AddAssignmentForm";
+import AddAssignmentForm from "./forms/AddAssignmentForm";
 
 export default function AddAssignment() {
   const [modalOpen, setModalOpen] = useState(false);

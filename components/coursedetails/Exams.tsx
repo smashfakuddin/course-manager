@@ -1,22 +1,29 @@
-import AddExams from "./AddExams"
+import AddExams from "./AddExams";
+import DeleteExam from './DeleteExam';
 
-export default function Exams() {
+export default function Exams({ exams }: { exams: any }) {
   return (
     <div className="rounded-2xl p-6">
-      <AddExams/>
+      <AddExams />
       <div className="space-y-4">
-        <div className="border border-gray-200 rounded-lg p-4">
-          <p className="font-medium text-gray-700">Midterm Exam</p>
-          <p className="text-gray-600 text-sm mt-1">
-            October 15, 2025 | Covers Week 1 - Week 6
-          </p>
-        </div>
-        <div className="border border-gray-200 rounded-lg p-4">
-          <p className="font-medium text-gray-700">Final Exam</p>
-          <p className="text-gray-600 text-sm mt-1">
-            December 20, 2025 | Covers Entire Course
-          </p>
-        </div>
+        {exams.length>0 ?exams.map((exam: any) => (
+          <div
+            key={exam._id.toString()}
+            className="border border-gray-200 rounded-lg p-4"
+          >
+            <p className="font-medium text-gray-700 flex items-center gap-3">{exam.title} <DeleteExam id={exam._id.toString()}/></p>
+            <p className="text-gray-600 text-sm mt-1">
+              {new Date(exam.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}{" "}
+              | {exam.description}
+            </p>
+          </div>
+        )):<div className=" min-h-[150px] flex items-center justify-center">
+          <p className=" font-semibold">Nothing Posted Yet !!!</p>
+          </div>}
       </div>
     </div>
   );

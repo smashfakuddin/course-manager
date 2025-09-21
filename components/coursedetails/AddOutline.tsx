@@ -3,7 +3,7 @@ import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import Modal from "../common/Modal";
 import { addOutlineByCourse } from "@/db/queries/outline";
-import AddOutlineForm from "./AddOutlineForm";
+import AddOutlineForm from "./forms/AddOutlineForm";
 import { toast } from "react-toastify";
 
 type AddOutlineProps = {

@@ -4,7 +4,6 @@ import Banner from "@/components/coursedetails/Banner";
 import Exams from "@/components/coursedetails/Exams";
 import Outline from "@/components/coursedetails/Outline";
 import Overview from "@/components/coursedetails/Overview";
-import CountdownTimer from "@/components/ui/CountdownTimmer";
 import { getCourseById } from "@/db/queries/courses";
 
 export default async function CourseIdPage({
@@ -15,6 +14,10 @@ export default async function CourseIdPage({
   const { courseid } = await params;
 
   const courseDetails = await getCourseById(courseid);
+
+  if(!courseDetails){
+    return <p>Nothing Found On This Course id</p>
+  }
   console.log(courseDetails)
 
   return (
@@ -60,7 +63,7 @@ export default async function CourseIdPage({
           {/* Announcements */}
           <Announcement assignments = {courseDetails?.assignment}/>
           {/* Exams */}
-          <Exams/>
+          <Exams exams= {courseDetails?.event}/>
         </div>
       </div>
     </div>

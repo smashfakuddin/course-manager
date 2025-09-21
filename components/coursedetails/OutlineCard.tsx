@@ -14,7 +14,7 @@ import { addOutlineByCourse, deleteOutline } from "@/db/queries/outline";
 import { addResourceByOutline } from "@/db/queries/resource";
 import { toast } from "react-toastify";
 import Modal from "../common/Modal";
-import AddResourceForm from "./AddResourceForm";
+import AddResourceForm from "./forms/AddResourceForm";
 
 export type Outline = {
   title: string;

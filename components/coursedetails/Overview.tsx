@@ -66,7 +66,7 @@ export default function Overview({ overview, courseId }: props) {
             Nothing here yet — click Edit to add an Overview.
           </div>
         )}
-</div>
+      </div>
     </div>
   );
 }

@@ -56,7 +56,8 @@ export async function getCourseById(courseId) {
         path: "resource", // 👈 nested populate
       },
     })
-    .populate({ path: "assignment" })
+    .populate({ path: "assignment" }).
+    populate({path:'event'})
     .lean();
 
   if (!courseDocs) {
