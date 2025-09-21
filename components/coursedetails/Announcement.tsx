@@ -3,11 +3,12 @@ import AddAssignment from "./AddAssignment";
 import { Trash } from "lucide-react";
 import DeleteAssignment from "./DeleteAssignment";
 
-export default function Announcement({ assignments }: any) {
+export default function Announcement({ assignments, role }: any) {
   return (
     <div className=" p-6 space-y-2">
       <h2 className="text-xl flex items-center justify-between font-semibold text-gray-800 mb-4">
-        Upcoming Assignment <AddAssignment isEdit={false} />
+        Upcoming Assignment
+        {role !== "student" && <AddAssignment isEdit={false} />}
       </h2>
       <div className="space-y-4 min-h-[100px] ">
         {assignments.length > 0 ? (
@@ -17,9 +18,13 @@ export default function Announcement({ assignments }: any) {
               className="border-l-4 border-blue-500 bg-blue-50 p-4 rounded"
             >
               <div className="font-medium text-gray-700 flex gap-5 items-center">
-                {assignment.title} Posted.{" "} 
-                <AddAssignment isEdit={true} assignment={assignment}/>
-                <DeleteAssignment id={assignment._id.toString()} />
+                {assignment.title} Posted.{" "}
+                {role !== "student" && (
+                  <>
+                    <AddAssignment isEdit={true} assignment={assignment} />
+                    <DeleteAssignment id={assignment._id.toString()} />
+                  </>
+                )}
               </div>
               <p className="text-gray-600 text-sm mt-1">
                 {assignment.description} by{" "}

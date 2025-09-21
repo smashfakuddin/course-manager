@@ -1,10 +1,11 @@
-
+import { auth } from "@/auth";
 import Announcement from "@/components/coursedetails/Announcement";
 import Banner from "@/components/coursedetails/Banner";
 import Exams from "@/components/coursedetails/Exams";
 import Outline from "@/components/coursedetails/Outline";
 import Overview from "@/components/coursedetails/Overview";
 import { getCourseById } from "@/db/queries/courses";
+import { redirect } from "next/navigation";
 
 export default async function CourseIdPage({
   params,
@@ -12,13 +13,17 @@ export default async function CourseIdPage({
   params: Promise<{ courseid: string }>;
 }) {
   const { courseid } = await params;
+  const session = await auth();
 
+  if (!session) {
+    redirect("/login");
+  }
   const courseDetails = await getCourseById(courseid);
 
-  if(!courseDetails){
-    return <p>Nothing Found On This Course id</p>
+  if (!courseDetails) {
+    return <p>Nothing Found On This Course id</p>;
   }
-  console.log(courseDetails)
+  console.log(session);
 
   return (
     <div>
@@ -32,10 +37,15 @@ export default async function CourseIdPage({
           <Overview
             overview={courseDetails?.overview}
             courseId={courseDetails?._id.toString()}
+            role={(session?.user as { role?: string })?.role ?? ""}
           />
           {/* Course outline with resourece */}
           <div className="">
-            <Outline courseId = {courseid} outlines={courseDetails?.outline}/>
+            <Outline
+              courseId={courseid}
+              outlines={courseDetails?.outline}
+              role={(session?.user as { role?: string })?.role ?? ""}
+            />
           </div>
           {/* Discussion */}
           <div className="bg-white shadow rounded-2xl p-6">
@@ -61,9 +71,15 @@ export default async function CourseIdPage({
         </div>
         <div className="bg-white shadow rounded-2xl col-span-1 min-w-[300px] space-y-3">
           {/* Announcements */}
-          <Announcement assignments = {courseDetails?.assignment}/>
+          <Announcement
+            assignments={courseDetails?.assignment}
+            role={(session?.user as { role?: string })?.role ?? ""}
+          />
           {/* Exams */}
-          <Exams exams= {courseDetails?.event}/>
+          <Exams
+            exams={courseDetails?.event}
+            role={(session?.user as { role?: string })?.role ?? ""}
+          />
         </div>
       </div>
     </div>

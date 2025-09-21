@@ -20,15 +20,17 @@ export type Outline = {
   title: string;
   description: string;
   _id: string;
-  resource:Array<object>;
+  resource: Array<object>;
 };
 
 export default function OutlineCard({
   outline,
   courseId,
+  role,
 }: {
   outline: Outline;
   courseId: string;
+  role: string;
 }) {
   const [open, setOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -65,7 +67,6 @@ export default function OutlineCard({
     } catch (error) {}
   };
 
-
   return (
     <div className="border border-gray-200 rounded-lg ">
       <h2>
@@ -82,19 +83,23 @@ export default function OutlineCard({
             <Video />
             <span>{outline.title}</span>
             <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">
-              {outline.resource.length >0? `${outline.resource.length} Resources`:'Nothing Added yet'}
+              {outline.resource.length > 0
+                ? `${outline.resource.length} Resources`
+                : "Nothing Added yet"}
             </span>
             <div className="relative group">
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation(); // don’t toggle
-                  handleModalOpen();
-                }}
-                className="text-gray-500 hover:text-blue-600 cursor-pointer"
-              >
-                <PlusIcon className="w-4 h-4" />
-              </button>
+              {role !== "student" && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation(); // don’t toggle
+                    handleModalOpen();
+                  }}
+                  className="text-gray-500 hover:text-blue-600 cursor-pointer"
+                >
+                  <PlusIcon className="w-4 h-4" />
+                </button>
+              )}
 
               {/* Tooltip */}
               <span
@@ -107,16 +112,18 @@ export default function OutlineCard({
             </div>
 
             <div className="relative group">
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation(); // don’t toggle
-                  handleDelete();
-                }}
-                className="text-gray-500 hover:text-red-600 cursor-pointer"
-              >
-                <Trash className="w-4 h-4" />
-              </button>
+              {role !== "student" && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation(); // don’t toggle
+                    handleDelete();
+                  }}
+                  className="text-gray-500 hover:text-red-600 cursor-pointer"
+                >
+                  <Trash className="w-4 h-4" />
+                </button>
+              )}
               <span
                 className="absolute -top-8 left-1/2 -translate-x-1/2 
                    scale-0 group-hover:scale-100 transition-transform
@@ -147,7 +154,11 @@ export default function OutlineCard({
       {/* Dropdown content */}
       {open && (
         <div className="p-4 text-gray-600 text-sm leading-relaxed border-b border-gray-200">
-          <Resource resources = {outline?.resource} outlineId={outline._id.toString()}/>
+          <Resource
+            resources={outline?.resource}
+            outlineId={outline._id.toString()}
+            role={role}
+          />
         </div>
       )}
       {/* resource adding modal */}

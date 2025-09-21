@@ -7,8 +7,7 @@ type ResourceProps = {
   description: string;
   url: string;
 };
-export default function Resource({ resources, outlineId }: any) {
-
+export default function Resource({ resources, outlineId, role }: any) {
   const handleDeleteResource = async (resourceId: string) => {
     try {
       const response = await deleteResourceById(resourceId, outlineId);
@@ -19,7 +18,7 @@ export default function Resource({ resources, outlineId }: any) {
       }
     } catch (error) {}
   };
-  
+
   return (
     <ul className="max-w-md space-y-1 text-gray-500 list-inside dark:text-gray-400">
       {resources.length > 0 ? (
@@ -43,10 +42,12 @@ export default function Resource({ resources, outlineId }: any) {
             >
               {resource.title}
             </a>
-            <Trash2
-              className="h-4 w-4 cursor-pointer"
-              onClick={() => handleDeleteResource(resource?._id.toString())}
-            />
+            {role !== "student" && (
+              <Trash2
+                className="h-4 w-4 cursor-pointer"
+                onClick={() => handleDeleteResource(resource?._id.toString())}
+              />
+            )}
           </li>
         ))
       ) : (

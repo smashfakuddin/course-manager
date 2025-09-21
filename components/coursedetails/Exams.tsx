@@ -1,12 +1,12 @@
 import AddExams from "./AddExams";
 import DeleteExam from "./DeleteExam";
 
-export default function Exams({ exams }: { exams: any }) {
+export default function Exams({ exams, role }: { exams: any; role: string }) {
   return (
     <div className="rounded-2xl space-y-2 p-6">
       <h2 className="flex text-xl font-semibold items-center justify-between">
         Upcoming Event
-        <AddExams isEdit={false} />
+        {role !== "student" && <AddExams isEdit={false} />}
       </h2>
       <div className="space-y-4">
         {exams.length > 0 ? (
@@ -16,8 +16,13 @@ export default function Exams({ exams }: { exams: any }) {
               className="border border-gray-200 rounded-lg p-4"
             >
               <div className="font-medium text-gray-700 flex items-center gap-3">
-                {exam.title} <AddExams isEdit={true} exam={exam}/>{" "}
-                <DeleteExam id={exam._id.toString()} />
+                {exam.title}
+                {role !== "student" && (
+                  <>
+                    <AddExams isEdit={true} exam={exam} />{" "}
+                    <DeleteExam id={exam._id.toString()} />
+                  </>
+                )}
               </div>
               <p className="text-gray-600 text-sm mt-1">
                 {new Date(exam.date).toLocaleDateString("en-US", {

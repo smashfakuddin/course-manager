@@ -7,9 +7,10 @@ import { toast } from "react-toastify";
 type props = {
   overview: string;
   courseId: string;
+  role: string;
 };
 
-export default function Overview({ overview, courseId }: props) {
+export default function Overview({ overview, courseId, role }: props) {
   const [isEdit, setIsEdit] = useState(false);
   const [text, setText] = useState(overview);
 
@@ -30,22 +31,26 @@ export default function Overview({ overview, courseId }: props) {
     <div className="px-6 space-y-2">
       <div className=" flex justify-between items-center">
         <h2 className=" text-2xl tracking-tighter font-semibold">Overview</h2>
-        {isEdit ? (
-          <button
-            onClick={handleSave}
-            className="btn-main flex items-center gap-2"
-          >
-            <Save className="h-4 w-4" />
-            Save{" "}
-          </button>
+        {role !== "student" ? (
+          isEdit ? (
+            <button
+              onClick={handleSave}
+              className="btn-main flex items-center gap-2"
+            >
+              <Save className="h-4 w-4" />
+              Save{" "}
+            </button>
+          ) : (
+            <button
+              onClick={handleEdit}
+              className="btn-main flex items-center gap-2"
+            >
+              <Edit className="h-4 w-4" />
+              Edit{" "}
+            </button>
+          )
         ) : (
-          <button
-            onClick={handleEdit}
-            className="btn-main flex items-center gap-2"
-          >
-            <Edit className="h-4 w-4" />
-            Edit{" "}
-          </button>
+          ""
         )}
       </div>{" "}
       <div className="min-h-[120px]">
