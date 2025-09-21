@@ -12,6 +12,6 @@ const examSchema = new Schema(
   { timestamps: true }
 );
 
-const Exam = models.Exam || model("Exam", examSchema);
+const Exam = models.Exam ?? model("Exam", examSchema);
 
 export default Exam;

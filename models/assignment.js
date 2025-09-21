@@ -12,6 +12,6 @@ const assignmentSchema = new Schema(
   { timestamps: true }
 );
 
-const Assignment = models.Assignment || model("Assignment", assignmentSchema);
+const Assignment = models.Assignment ?? model("Assignment", assignmentSchema);
 
 export default Assignment;

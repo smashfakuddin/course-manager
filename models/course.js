@@ -1,6 +1,6 @@
 // models/Course.js
 import mongoose from "mongoose";
-import Outline from '@/models/outline'
+import Outline from "@/models/outline";
 
 const { Schema, model, models } = mongoose;
 
@@ -20,6 +20,6 @@ const courseSchema = new Schema(
   { timestamps: true }
 );
 
-const Course = models.Course || model("Course", courseSchema);
+const Course = models.Course ?? model("Course", courseSchema);
 
 export default Course;

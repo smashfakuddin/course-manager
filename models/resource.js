@@ -11,6 +11,6 @@ const resourceSchema = new Schema(
   { timestamps: true }
 );
 
-const Resource = models.Resource || model("Resource", resourceSchema);
+const Resource = models.Resource ?? model("Resource", resourceSchema);
 
 export default Resource;
