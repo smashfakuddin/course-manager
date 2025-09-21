@@ -82,7 +82,7 @@ export default function Banner({ courseDetails }: { courseDetails: any }) {
           </div>
 
           {/* Actions */}
-          <div className="flex gap-3 mt-2">
+          <div className="flex flex-col md:flex-row gap-3 mt-2">
             <button className="bg-black px-4 py-2 text-white font-semibold flex items-center gap-2 rounded-lg hover:bg-gray-900 transition">
               Enroll Course
             </button>

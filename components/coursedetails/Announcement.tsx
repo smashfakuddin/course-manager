@@ -10,12 +10,12 @@ export default function Announcement({ assignments, role }: any) {
         Upcoming Assignment
         {role !== "student" && <AddAssignment isEdit={false} />}
       </h2>
-      <div className="space-y-4 min-h-[100px] ">
+      <div className="space-y-4 min-h-[100px] min-w-[300px]">
         {assignments.length > 0 ? (
           assignments.map((assignment: any) => (
             <div
               key={assignment._id}
-              className="border-l-4 border-blue-500 bg-blue-50 p-4 rounded"
+              className="border-l-4 space-y-3 border-blue-500 bg-blue-50 p-4 rounded"
             >
               <div className="font-medium text-gray-700 flex gap-5 items-center">
                 {assignment.title} Posted.{" "}
@@ -34,9 +34,9 @@ export default function Announcement({ assignments, role }: any) {
                 )}
               </p>
 
-              <div className=" flex justify-between items-center">
-                <button className="mt-2 text-sm text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded">
-                  Submit Assignment
+              <div className=" flex flex-col-reverse lg:flex-row justify-between items-center">
+                <button className=" cursor-pointer text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+                  Submit
                 </button>
                 <CountdownTimer targetDate={assignment.submissionDate} />
               </div>

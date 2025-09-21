@@ -12,7 +12,7 @@ type OutlineProps = {
 export default function Outline({ courseId, outlines, role }: OutlineProps) {
   return (
     <div className="px-6 space-y-2 ">
-      <div className=" flex justify-between">
+      <div className=" flex flex-col md:flex-row gap-4 justify-between">
         <h2 className=" text-xl font-semibold ">Outline Of The Course</h2>
         {role !== "student" && <AddOutline courseId={courseId} />}
       </div>

@@ -82,10 +82,10 @@ export default function OutlineCard({
           >
             <Video />
             <span>{outline.title}</span>
-            <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">
+            <span className="bg-blue-100 text-nowrap text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">
               {outline.resource.length > 0
                 ? `${outline.resource.length} Resources`
-                : "Nothing Added yet"}
+                : "N/A"}
             </span>
             <div className="relative group">
               {role !== "student" && (
