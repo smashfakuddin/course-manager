@@ -15,6 +15,6 @@ const outlineSchema = new Schema(
   { timestamps: true }
 );
 
-const Outline = models.Outline || model("Outline", outlineSchema);
+const Outline = models.Outline ?? model("Outline", outlineSchema);
 
 export default Outline;

@@ -1,5 +1,6 @@
 // models/Course.js
 import mongoose from "mongoose";
+import Outline from '@/models/outline'
 
 const { Schema, model, models } = mongoose;
 
