@@ -1,6 +1,9 @@
 // models/Course.js
 import mongoose from "mongoose";
 import Outline from "@/models/outline";
+import Assignment from "@/models/assignment";
+import Exam from "@/models/exams";
+import User from "@/models/user"
 
 const { Schema, model, models } = mongoose;
 
