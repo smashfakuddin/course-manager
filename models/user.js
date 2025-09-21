@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import Course from '@/models/course'
+import User from '@/models/user'
 
 const userSchema = new mongoose.Schema(
   {

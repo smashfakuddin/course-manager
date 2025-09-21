@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import Resource from "./resource";
 const { Schema, model, models } = mongoose;
 
 const outlineSchema = new Schema(
