@@ -31,7 +31,7 @@ export async function createExam(courseId, data) {
   }
 }
 
-export async function editExam(courseId, data, examId) {
+export async function editExam(data, examId) {
   await dbConnect();
 
   try {
@@ -48,7 +48,7 @@ export async function editExam(courseId, data, examId) {
     await exam.save();
 
     // 4. Revalidate cache
-    revalidatePath(`/courses/${courseId}`);
+    revalidatePath("/courses/[courseid]");
 
     return { success: true, message: "Exam updated successfully" };
   } catch (error) {
@@ -72,7 +72,7 @@ export async function deleteExamById(examId, courseId) {
     });
 
     // Optional: Revalidate the course page to reflect changes
-    revalidatePath(`/courses/${courseId}`);
+    revalidatePath("/courses/[courseid]");
 
     return { success: true, message: "Exam deleted successfully" };
   } catch (error) {

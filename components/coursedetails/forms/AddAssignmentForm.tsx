@@ -1,14 +1,22 @@
 "use client";
-import { createAssignment } from "@/db/queries/assignment";
+import { createAssignment, editAssignment } from "@/db/queries/assignment";
 import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 
+type Assignment = {
+  _id: string;
+  title: string;
+  description: string;
+  submissionDate: Date | string;
+};
 export default function AddAssignmentForm({
   onClose,
-  onSubmit,
+  assignment,
+  isEdit,
 }: {
   onClose: () => void;
-  onSubmit: (data: any) => void; // 👈 parent handles add/edit
+  assignment?: Assignment;
+  isEdit: boolean;
 }) {
   const params = useParams();
 
@@ -18,8 +26,13 @@ export default function AddAssignmentForm({
       data[key] = value;
     });
     try {
-      const response = await createAssignment(params.courseid, data);
-      console.log(response)
+      let response;
+      if (!isEdit) {
+        response = await createAssignment(params.courseid, data);
+      } else if (isEdit) {
+        response = await editAssignment(data, assignment?._id.toString());
+      }
+
       if (response?.success) {
         toast.success(response.message);
       } else if (!response?.success) {
@@ -27,8 +40,8 @@ export default function AddAssignmentForm({
       }
     } catch (error) {
       console.log(error);
-    }finally{
-      onClose()
+    } finally {
+      onClose();
     }
   };
   return (
@@ -49,6 +62,7 @@ export default function AddAssignmentForm({
           type="text"
           id="title"
           name="title"
+          defaultValue={assignment?.title}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Introduction To The Anp"
           required
@@ -67,6 +81,7 @@ export default function AddAssignmentForm({
           type="text"
           id="description"
           name="description"
+          defaultValue={assignment?.description}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="e.g Awesome Course Detail"
           required
@@ -83,12 +98,17 @@ export default function AddAssignmentForm({
           type="datetime-local"
           name="submissionDate"
           id="submissionDate"
+          defaultValue={
+            assignment?.submissionDate
+              ? new Date(assignment?.submissionDate).toISOString().slice(0, 16) // "2025-12-20T14:30"
+              : ""
+          }
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
       </div>
 
       <button className="btn-main w-full" type="submit">
-        Add
+        {isEdit ? "Save Edit" : "Save"}
       </button>
     </form>
   );

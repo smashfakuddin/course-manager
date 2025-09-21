@@ -1,10 +1,23 @@
-"use client"
-import { PlusIcon } from "lucide-react";
+"use client";
+import { Edit, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import Modal from "../common/Modal";
 import AddAssignmentForm from "./forms/AddAssignmentForm";
 
-export default function AddAssignment() {
+type Assignment = {
+  _id: string;
+  title: string;
+  description: string;
+  submissionDate: Date | string;
+};
+
+export default function AddAssignment({
+  isEdit,
+  assignment,
+}: {
+  isEdit: boolean;
+  assignment?: Assignment;
+}) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalClose = () => {
@@ -16,13 +29,15 @@ export default function AddAssignment() {
   };
   return (
     <>
-      <h2 className="text-xl flex items-center justify-between font-semibold text-gray-800 mb-4">
-        Upcoming Assignment{" "}
-        <PlusIcon className="cursor-pointer" onClick={handleModalOpen} />
-      </h2>
+      {isEdit ? (
+        <Edit className="cursor-pointer h-4 w-4" onClick={handleModalOpen} />
+      ) : (
+        <PlusIcon onClick={handleModalOpen} />
+      )}
+
       {modalOpen && (
         <Modal isOpen={modalOpen} onClose={handleModalClose}>
-          <AddAssignmentForm onClose={handleModalClose} onSubmit={()=>{}}/>
+          <AddAssignmentForm onClose={handleModalClose} assignment={assignment} isEdit={isEdit}/>
         </Modal>
       )}
     </>

@@ -30,6 +30,35 @@ export async function createAssignment(courseId, data) {
   }
 }
 
+export async function editAssignment(data, assignmentId) {
+  await dbConnect();
+
+  try {
+    const assignment = await Assignment.findById(assignmentId);
+    if (!assignment) {
+      return { success: false, message: "Assignment not found" };
+    }
+
+    // Update only provided fields
+    if (data.title) assignment.title = data.title;
+    if (data.description) assignment.description = data.description;
+    if (data.submissionDate)
+      assignment.submissionDate = new Date(data.submissionDate);
+
+    await assignment.save();
+
+    // Revalidate any cache if using Next.js caching
+    revalidatePath("/courses/[courseid]");
+
+    return { success: true, message: "Assignment updated successfully" };
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      message: "Something went wrong while updating the assignment",
+    };
+  }
+}
 export async function deleteAssignmentById(assignmentId, courseId) {
   await dbConnect();
   try {
@@ -47,7 +76,7 @@ export async function deleteAssignmentById(assignmentId, courseId) {
     });
 
     // Optional: Revalidate the course page to reflect changes
-    revalidatePath(`/courses/${courseId}`);
+    revalidatePath(`/courses/[courseid]`);
 
     return { success: true, message: "Assignment deleted successfully" };
   } catch (error) {

@@ -22,19 +22,17 @@ export default function AddExamsForm({
   const params = useParams();
 
   const handleSubmit = async (formData: FormData) => {
-    
     const data: Record<string, any> = {};
     formData.forEach((value, key) => {
       data[key] = value;
     });
 
     try {
-
       let response;
       if (!isEdit) {
         response = await createExam(params.courseid, data);
       } else if (isEdit) {
-        response = await editExam(params.courseid, data, exam?._id.toString());
+        response = await editExam(data, exam?._id.toString());
       }
 
       if (response?.success) {
