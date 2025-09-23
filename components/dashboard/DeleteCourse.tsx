@@ -5,6 +5,7 @@ import DeleteIcon from "@/icons/delete";
 import { toast } from "react-toastify";
 export default function DeleteCourse({ id }: { id: string }) {
   const handleDelete = async () => {
+    console.log('courseid',id)
     // Implement delete functionality here
     const response = await deleteCourse(id)
     if(response.message){

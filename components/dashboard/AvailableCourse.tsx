@@ -51,7 +51,7 @@ export default async function AvailableCourse({ session }: { session: any }) {
                 )}
               />
               {session?.user?.role === "admin" && (
-                <DeleteCourse id={course.id} />
+                <DeleteCourse id={course._id.toString()} />
               )}
             </div>
           </div>

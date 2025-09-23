@@ -3,6 +3,10 @@
 import { dbConnect } from "@/db/dbconnect.js";
 import Course from "@/models/course";
 import { revalidatePath } from "next/cache";
+import Outline from "@/models/outline";
+import Assignment from "@/models/assignment";
+import Resource from "@/models/resource"
+import Exam from "@/models/exams";
 
 // here is current running semester constant
 
@@ -56,8 +60,8 @@ export async function getCourseById(courseId) {
         path: "resource", // 👈 nested populate
       },
     })
-    .populate({ path: "assignment" }).
-    populate({path:'event'})
+    .populate({ path: "assignment" })
+    .populate({ path: "event" })
     .lean();
 
   if (!courseDocs) {
@@ -84,9 +88,33 @@ export async function createCourse(data) {
 
 export async function deleteCourse(courseId) {
   await dbConnect();
+
+  const course = await Course.findById(courseId);
+
+  if (!course) {
+    return { success: false, message: "Course not found" };
+  }
+
+  // 1️⃣ Delete resources of each outline
+  const outlines = await Outline.find({ _id: { $in: course.outline } });
+  for (const outline of outlines) {
+    if (outline.resource && outline.resource.length > 0) {
+      await Resource.deleteMany({ _id: { $in: outline.resource } });
+    }
+  }
+
+  // 2️⃣ Delete outlines
+  await Outline.deleteMany({ _id: { $in: course.outline } });
+
+  // 3️⃣ Delete assignments
+  await Assignment.deleteMany({ _id: { $in: course.assignment } });
+
+  // 4️⃣ Delete exams
+  await Exam.deleteMany({ _id: { $in: course.event } });
+
+  // 5️⃣ Finally delete the course
   await Course.findByIdAndDelete(courseId);
 
   revalidatePath("/dashboard");
-
-  return { message: "Course deleted successfully" };
+  return { success: true, message: "Course and all related data deleted" };
 }
