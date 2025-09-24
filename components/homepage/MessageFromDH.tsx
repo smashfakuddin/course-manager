@@ -14,7 +14,7 @@ export default function MessageFromDH() {
         </div>
 
         {/* Message */}
-        <div className="flex-1">
+        <div className="flex-1 px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
             Message from the Department Head
           </h2>

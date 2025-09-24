@@ -3,11 +3,11 @@ export default function HomepageBanner() {
     <section className="relative h-screen flex items-center justify-center text-center px-6 overflow-hidden">
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0')",
-        }}
+        className="absolute inset-0 bg-cover bg-center bg-gradient-to-r from-gray-400 via-gray-950 to-gray-400"
+        // style={{
+        //   backgroundImage:
+        //     "url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0')",
+        // }}
       />
 
       {/* Dark Gradient Overlay */}
@@ -24,7 +24,7 @@ export default function HomepageBanner() {
         </h1>
 
         {/* Subheadline */}
-        <p className="mt-6 text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl">
+        <p className="mt-6 text-lg md:text-xl text-neutral-200 leading-relaxed max-w-2xl">
           A modern platform built for the Department of Anthropology. Simplify
           course enrollment, assignments, discussions, and track progress—all in
           one place.

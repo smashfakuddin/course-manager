@@ -3,7 +3,7 @@ export default function HomepageSummary() {
     <div className="relative h-[40vh] w-full">
       {/* Background image with blur */}
       <div
-        className="absolute inset-0 bg-cover bg-center filter blur-sm"
+        className="absolute inset-0 bg-cover bg-center filter blur-sm "
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/20/cambridge.JPG?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0')",
