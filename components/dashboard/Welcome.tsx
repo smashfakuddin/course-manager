@@ -7,8 +7,8 @@ export default function Welcome({ session }: { session: any }) {
 
 
   return (
-    <div className="bg-white shadow rounded-lg p-6 mb-6 flex items-center justify-between">
-      <div className="flex items-center space-x-4">
+    <div className="bg-white gap-4 flex-col md:flex-row shadow rounded-lg p-6 mb-6 flex items-center justify-between">
+      <div className="flex flex-col  md:flex-row items-center space-x-4 space-y-2">
         <div className="bg-blue-100 p-3 rounded-full">
           <User className="text-blue-600 h-8 w-8" />
         </div>

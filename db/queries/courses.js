@@ -5,7 +5,7 @@ import Course from "@/models/course";
 import { revalidatePath } from "next/cache";
 import Outline from "@/models/outline";
 import Assignment from "@/models/assignment";
-import Resource from "@/models/resource"
+import Resource from "@/models/resource";
 import Exam from "@/models/exams";
 
 // here is current running semester constant
@@ -95,7 +95,6 @@ export async function deleteCourse(courseId) {
     return { success: false, message: "Course not found" };
   }
 
-  // 1️⃣ Delete resources of each outline
   const outlines = await Outline.find({ _id: { $in: course.outline } });
   for (const outline of outlines) {
     if (outline.resource && outline.resource.length > 0) {
@@ -103,16 +102,16 @@ export async function deleteCourse(courseId) {
     }
   }
 
-  // 2️⃣ Delete outlines
+  // Delete outlines
   await Outline.deleteMany({ _id: { $in: course.outline } });
 
-  // 3️⃣ Delete assignments
+  // Delete assignments
   await Assignment.deleteMany({ _id: { $in: course.assignment } });
 
-  // 4️⃣ Delete exams
+  // Delete exams
   await Exam.deleteMany({ _id: { $in: course.event } });
 
-  // 5️⃣ Finally delete the course
+  // Finally delete the course
   await Course.findByIdAndDelete(courseId);
 
   revalidatePath("/dashboard");
