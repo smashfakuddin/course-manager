@@ -27,7 +27,7 @@ export default function CourseCreation() {
     <div className="flex justify-between items-center mb-4">
       <div>
         <button
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
+          className="flex items-center gap-2 btn-alt-2 transition-all duration-300"
           onClick={() => setOpen((prev) => !prev)}
         >
           <svg

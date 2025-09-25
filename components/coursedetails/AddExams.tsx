@@ -20,7 +20,6 @@ type Props = {
 export default function AddExams({ isEdit, exam }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
 
-  console.log('logging exam',exam)
   const handleModalClose = () => {
     setModalOpen((prev) => !prev);
   };

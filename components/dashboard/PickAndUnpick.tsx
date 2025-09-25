@@ -85,14 +85,14 @@ export default function PickAndUnpick({
           {picked === userId ? (
             <button
               onClick={() => handleUnpick(courseId, userId)}
-              className="btn-main flex items-center"
+              className="btn-alt-2 flex items-center"
             >
               <MinusCircle className="h-4 w-4 mr-1" /> Unpick
             </button>
           ) : (
             <button
               onClick={() => handlePickCourse(courseId, userId)}
-              className="btn-main flex items-center"
+              className="btn-alt-2 flex items-center"
             >
               <PlusCircle className="h-4 w-4 mr-1" /> Pick
             </button>
@@ -104,14 +104,14 @@ export default function PickAndUnpick({
           {enrolled ? (
             <button
               onClick={() => handleEnrollRemove(courseId, userId)}
-              className="btn-main flex items-center"
+              className="btn-alt-2 flex items-center"
             >
               <MinusCircle className="h-4 w-4 mr-1" /> Unenroll
             </button>
           ) : (
             <button
               onClick={() => handleEnroll(courseId, userId)}
-              className="btn-main flex items-center"
+              className="btn-alt-2 flex items-center"
             >
               <PlusCircle className="h-4 w-4 mr-1" /> Enroll
             </button>

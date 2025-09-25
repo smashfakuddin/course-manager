@@ -20,7 +20,7 @@ export default function HomepageSummary() {
           .map((_, index) => (
             <div
               key={index}
-              className="p-6 max-w-96 w-full rounded-2xl shadow-xl backdrop-blur-lg bg-white/20 border border-white/30 text-white"
+              className="p-6 max-w-96 w-full rounded-md shadow-md backdrop-blur-lg bg-white/20 border border-white/30 text-white"
             >
               <h2 className="text-lg font-semibold">📚 Courses</h2>
               <p className="mt-2 text-sm text-gray-200">

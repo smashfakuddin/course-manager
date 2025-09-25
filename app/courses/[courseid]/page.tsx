@@ -23,7 +23,7 @@ export default async function CourseIdPage({
   if (!courseDetails) {
     return <p>Nothing Found On This Course id</p>;
   }
-  console.log(session);
+
 
   return (
     <div>

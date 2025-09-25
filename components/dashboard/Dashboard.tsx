@@ -7,7 +7,7 @@ export default async function Dashboard() {
   const session = await auth();
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 bg-[#003d5c] min-h-screen">
       {/* Welcome Section */}
       <Welcome session={session} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

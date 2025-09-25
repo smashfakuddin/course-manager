@@ -18,7 +18,7 @@ export default function AboutSection() {
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Feature 1 */}
-          <div className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition">
+          <div className="p-6 bg-white rounded-md shadow-md hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               📚 Easy Course Management
             </h3>
@@ -29,7 +29,7 @@ export default function AboutSection() {
           </div>
 
           {/* Feature 2 */}
-          <div className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition">
+          <div className="p-6 bg-white rounded-md shadow-md hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               👩‍🏫 Teacher Support
             </h3>
@@ -40,7 +40,7 @@ export default function AboutSection() {
           </div>
 
           {/* Feature 3 */}
-          <div className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition">
+          <div className="p-6 bg-white rounded-md shadow-md hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               📝 Assignments & Quizzes
             </h3>
@@ -51,7 +51,7 @@ export default function AboutSection() {
           </div>
 
           {/* Feature 4 */}
-          <div className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition">
+          <div className="p-6 bg-white rounded-md shadow-md hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               💬 Discussions
             </h3>
@@ -62,7 +62,7 @@ export default function AboutSection() {
           </div>
 
           {/* Feature 5 */}
-          <div className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition">
+          <div className="p-6 bg-white rounded-md shadow-md hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               🔒 Secure Access
             </h3>
@@ -73,7 +73,7 @@ export default function AboutSection() {
           </div>
 
           {/* Feature 6 */}
-          <div className="p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition">
+          <div className="p-6 bg-white rounded-md shadow-md hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               📊 Progress Tracking
             </h3>

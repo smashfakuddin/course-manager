@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 export async function getPickedCoursesByUserId(userId) {
   await dbConnect();
 
-  const pickedCourses = await Course.find({ picked: userId });
+  const pickedCourses = await Course.find({ picked: userId }).populate({path:'picked',select:"name"});
 
   return pickedCourses ? pickedCourses : [];
 }

@@ -38,7 +38,7 @@ const CreateCourseModal: FC<CreateCourseModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white dark:bg-gray-900 rounded-lg w-full max-w-md p-6">
-        <h2 className="text-xl font-bold mb-4">Create Course</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Create Course</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
           <div>
@@ -61,6 +61,7 @@ const CreateCourseModal: FC<CreateCourseModalProps> = ({
               placeholder="Write course description"
               onChange={(e) => setDescription(e.target.value)}
               required
+              rows={5}
               className="w-full border rounded-md p-2"
             />
           </div>
