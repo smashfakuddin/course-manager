@@ -20,7 +20,7 @@ export default async function AvailableCourse({ session }: { session: any }) {
         {availableCourse.map((course) => (
           <div
             key={course._id.toString()}
-            className="flex items-center justify-between bg-[#00293d] hover:bg-[#003652] transition-all duration-300 text-[#93c5d1]  rounded-lg main-shadow p-4"
+            className="flex cursor-pointer items-center justify-between bg-[#00293d] hover:bg-[#003652] transition-all duration-300 text-[#93c5d1]  rounded-lg main-shadow p-4"
           >
             {/* Course details */}
             <div className="flex flex-col ">

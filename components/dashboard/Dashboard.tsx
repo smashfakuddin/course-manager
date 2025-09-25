@@ -16,20 +16,20 @@ export default async function Dashboard() {
       </div>
 
       {/* Extra Dashboard Segments */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-        <div className="bg-white shadow rounded-lg p-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 ">
+        <div className="bg-[#003652] main-shadow rounded-lg p-6 hover:scale-105 duration-300 transition">
           <h3 className="text-lg font-semibold mb-2">Announcements</h3>
           <p className="text-gray-600 text-sm">
             Stay updated with the latest notices from the department.
           </p>
         </div>
-        <div className="bg-white shadow rounded-lg p-6">
+        <div className="bg-[#003652] main-shadow rounded-lg p-6 hover:scale-105 duration-300 transition">
           <h3 className="text-lg font-semibold mb-2">Assignments</h3>
           <p className="text-gray-600 text-sm">
             Submit and manage assignments for your picked courses.
           </p>
         </div>
-        <div className="bg-white shadow rounded-lg p-6">
+        <div className="bg-[#003652] main-shadow rounded-lg p-6 hover:scale-105 duration-300 transition">
           <h3 className="text-lg font-semibold mb-2">Discussions</h3>
           <p className="text-gray-600 text-sm">
             Join conversations and share resources with classmates.

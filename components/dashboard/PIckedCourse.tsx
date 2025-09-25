@@ -60,7 +60,7 @@ export default async function PickedCourse({ session }: { session: any }) {
           ))}
         </div>
       ) : (
-        <div className="h-full flex items-center justify-center text-gray-500 text-xl gap-3">
+        <div className="h-full flex md:items-center justify-center text-gray-500 text-xl gap-3">
           <Frown className="h-8 w-8" />
           <p>
             No courses{" "}

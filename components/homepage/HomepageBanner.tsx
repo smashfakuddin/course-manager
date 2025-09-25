@@ -48,19 +48,19 @@ export default function HomepageBanner() {
 
         {/* Feature Highlights */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-4xl">
-          <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg">
+          <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg hover:scale-105 transition duration-300">
             <h3 className="text-lg font-semibold">📚 Course Enrollment</h3>
             <p className="text-gray-300 text-sm mt-2">
               Register for courses and organize your semester effortlessly.
             </p>
           </div>
-          <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg">
+          <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg hover:scale-105 transition duration-300">
             <h3 className="text-lg font-semibold">📝 Assignments</h3>
             <p className="text-gray-300 text-sm mt-2">
               Submit assignments and track progress directly from the app.
             </p>
           </div>
-          <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg">
+          <div className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg hover:scale-105 transition duration-300">
             <h3 className="text-lg font-semibold">💬 Discussions</h3>
             <p className="text-gray-300 text-sm mt-2">
               Collaborate with peers and teachers through discussion forums.
