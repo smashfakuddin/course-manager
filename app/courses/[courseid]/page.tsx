@@ -24,9 +24,8 @@ export default async function CourseIdPage({
     return <p>Nothing Found On This Course id</p>;
   }
 
-
   return (
-    <div>
+    <div className=" bg-[#003652]">
       <Banner courseDetails={courseDetails} />
 
       {/* whole body part goes here */}
@@ -48,14 +47,14 @@ export default async function CourseIdPage({
             />
           </div>
           {/* Discussion */}
-          <div className="bg-white shadow rounded-2xl p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          <div className="bg-[#00293d] shadow rounded-md p-6">
+            <h2 className="text-xl font-semibold text-[#b4cdfa] mb-4">
               Discussion
             </h2>
             <div className="space-y-4">
               <div className="border rounded-lg p-3">
-                <p className="font-medium text-gray-700">Student A:</p>
-                <p className="text-gray-600 text-sm">
+                <p className="font-medium text-white">Student A:</p>
+                <p className="text-white text-sm">
                   Can someone explain cultural relativism?
                 </p>
               </div>
@@ -69,7 +68,7 @@ export default async function CourseIdPage({
             </div>
           </div>
         </div>
-        <div className="bg-white shadow rounded-2xl col-span-1 min-w-[300px] space-y-3">
+        <div className="rounded-2xl col-span-1 min-w-[300px] space-y-3">
           {/* Announcements */}
           <Announcement
             assignments={courseDetails?.assignment}

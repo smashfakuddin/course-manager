@@ -41,7 +41,7 @@ export default function AddOutline({ courseId }: AddOutlineProps) {
   return (
     <>
       <button
-        className=" btn-main flex items-center gap-2"
+        className=" btn-alt-2 flex items-center gap-2"
         onClick={handleModalOpen}
       >
         <PlusIcon className="h-4 w-4" /> Add Outline

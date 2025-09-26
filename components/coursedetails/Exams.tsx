@@ -1,21 +1,22 @@
+import NotingPosted from "../common/NotingPosted";
 import AddExams from "./AddExams";
 import DeleteExam from "./DeleteExam";
 
 export default function Exams({ exams, role }: { exams: any; role: string }) {
   return (
-    <div className="rounded-2xl space-y-2 p-6">
-      <h2 className="flex text-xl font-semibold items-center justify-between">
+    <div className="bg-[#00293d] px-6  py-4 space-y-2 rounded-md main-shadow ">
+      <h2 className="flex text-xl font-semibold items-center justify-between text-[#b4cdfa] mb-4">
         Upcoming Event
         {role !== "student" && <AddExams isEdit={false} />}
       </h2>
-      <div className="space-y-4">
+      <div className="space-y-4  rounded-md">
         {exams.length > 0 ? (
           exams.map((exam: any) => (
             <div
               key={exam._id.toString()}
-              className="border border-gray-200 rounded-lg p-4"
+              className="bg-[#1b1a29] text-[#b4cdfa] rounded-md  p-4"
             >
-              <div className="font-medium text-gray-700 flex items-center gap-3">
+              <div className="font-medium  flex items-center gap-3">
                 {exam.title}
                 {role !== "student" && (
                   <>
@@ -24,7 +25,7 @@ export default function Exams({ exams, role }: { exams: any; role: string }) {
                   </>
                 )}
               </div>
-              <p className="text-gray-600 text-sm mt-1">
+              <p className="text-gray-300 text-sm mt-1">
                 {new Date(exam.date).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -35,9 +36,7 @@ export default function Exams({ exams, role }: { exams: any; role: string }) {
             </div>
           ))
         ) : (
-          <div className=" min-h-[150px] flex items-center justify-center">
-            <p className=" font-semibold">Nothing Posted Yet !!!</p>
-          </div>
+          <NotingPosted/>
         )}
       </div>
     </div>

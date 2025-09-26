@@ -68,11 +68,11 @@ export default function OutlineCard({
   };
 
   return (
-    <div className="border border-gray-200 rounded-lg ">
+    <div className=" border border-[#44425b] rounded-md text-[#93c5d1]">
       <h2>
         <div
-          className={`flex cursor-pointer items-center justify-between w-full p-4 font-medium text-gray-700 border-b border-gray-200 hover:bg-gray-100 gap-3 ${
-            open ? "bg-gray-50" : ""
+          className={`flex rounded-md cursor-pointer items-center justify-between w-full p-4 bg-[#1b1a29] font-medium  gap-3 ${
+            open ? "" : ""
           }`}
         >
           {/* Left side (toggles accordion) */}
@@ -82,7 +82,7 @@ export default function OutlineCard({
           >
             <Video />
             <span>{outline.title}</span>
-            <span className="bg-blue-100 text-nowrap text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">
+            <span className="bg-blue-100 text-black text-nowrap  text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">
               {outline.resource.length > 0
                 ? `${outline.resource.length} Resources`
                 : "N/A"}
@@ -95,7 +95,7 @@ export default function OutlineCard({
                     e.stopPropagation(); // don’t toggle
                     handleModalOpen();
                   }}
-                  className="text-gray-500 hover:text-blue-600 cursor-pointer"
+                  className=" cursor-pointer"
                 >
                   <PlusIcon className="w-4 h-4" />
                 </button>
@@ -105,7 +105,7 @@ export default function OutlineCard({
               <span
                 className="absolute -top-8 left-1/2 -translate-x-1/2 
                    scale-0 group-hover:scale-100 transition-transform
-                   rounded-md bg-gray-800 text-white text-xs px-2 py-1 text-nowrap"
+                   rounded-md bg-gray-800  text-xs px-2 py-1 text-nowrap"
               >
                 Add Resource for this outline
               </span>
@@ -119,7 +119,7 @@ export default function OutlineCard({
                     e.stopPropagation(); // don’t toggle
                     handleDelete();
                   }}
-                  className="text-gray-500 hover:text-red-600 cursor-pointer"
+                  className=" hover:text-red-600 cursor-pointer"
                 >
                   <Trash className="w-4 h-4" />
                 </button>
@@ -127,7 +127,7 @@ export default function OutlineCard({
               <span
                 className="absolute -top-8 left-1/2 -translate-x-1/2 
                    scale-0 group-hover:scale-100 transition-transform
-                   rounded-md bg-gray-800 text-white text-xs px-2 py-1 text-nowrap"
+                   rounded-md bg-gray-800 text-xs px-2 py-1 text-nowrap"
               >
                 Delete This Outline
               </span>
@@ -139,7 +139,7 @@ export default function OutlineCard({
             <button
               type="button"
               onClick={() => setOpen(!open)}
-              className="text-gray-600"
+              className=""
             >
               {open ? (
                 <ChevronUp className="w-5 h-5" />
@@ -153,7 +153,7 @@ export default function OutlineCard({
 
       {/* Dropdown content */}
       {open && (
-        <div className="p-4 text-gray-600 text-sm leading-relaxed border-b border-gray-200">
+        <div className="p-4  text-sm leading-relaxed ">
           <Resource
             resources={outline?.resource}
             outlineId={outline._id.toString()}

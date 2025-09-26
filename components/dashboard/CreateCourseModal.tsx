@@ -37,7 +37,7 @@ const CreateCourseModal: FC<CreateCourseModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-gray-900 rounded-lg w-full max-w-md p-6">
+      <div className="bg-[#003652] dark:bg-gray-900 rounded-lg w-full max-w-md p-6">
         <h2 className="text-2xl font-bold mb-4 text-center">Create Course</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
@@ -97,13 +97,13 @@ const CreateCourseModal: FC<CreateCourseModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-300 rounded-md"
+              className="btn-alt-2"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              className="px-4 py-2 bg-neutral-800 text-white rounded-md"
             >
               Create
             </button>

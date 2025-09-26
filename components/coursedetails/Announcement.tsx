@@ -1,12 +1,13 @@
 import CountdownTimer from "@/components/ui/CountdownTimmer";
 import AddAssignment from "./AddAssignment";
-import { Trash } from "lucide-react";
+import { Send, SendHorizonal, Trash } from "lucide-react";
 import DeleteAssignment from "./DeleteAssignment";
+import NotingPosted from "../common/NotingPosted";
 
 export default function Announcement({ assignments, role }: any) {
   return (
-    <div className=" p-6 space-y-2">
-      <h2 className="text-xl flex items-center justify-between font-semibold text-gray-800 mb-4">
+    <div className="bg-[#00293d] px-6 py-4 space-y-2 rounded-md main-shadow">
+      <h2 className="text-xl flex items-center justify-between font-semibold text-[#b4cdfa] mb-4">
         Upcoming Assignment
         {role !== "student" && <AddAssignment isEdit={false} />}
       </h2>
@@ -15,9 +16,9 @@ export default function Announcement({ assignments, role }: any) {
           assignments.map((assignment: any) => (
             <div
               key={assignment._id}
-              className="border-l-4 space-y-3 border-blue-500 bg-blue-50 p-4 rounded"
+              className=" space-y-3 bg-[#1b1a29] text-[#93c5d1] p-4 rounded-md"
             >
-              <div className="font-medium text-gray-700 flex gap-5 items-center">
+              <div className="font-medium  flex gap-5 items-center">
                 {assignment.title} Posted.{" "}
                 {role !== "student" && (
                   <>
@@ -26,7 +27,7 @@ export default function Announcement({ assignments, role }: any) {
                   </>
                 )}
               </div>
-              <p className="text-gray-600 text-sm mt-1">
+              <p className="text-sm mt-1">
                 {assignment.description} by{" "}
                 {new Date(assignment.submissionDate).toLocaleDateString(
                   undefined,
@@ -35,17 +36,15 @@ export default function Announcement({ assignments, role }: any) {
               </p>
 
               <div className=" flex flex-col-reverse lg:flex-row justify-between items-center">
-                <button className=" cursor-pointer text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
-                  Submit
+                <button className=" btn-alt-2 flex items-center gap-2 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+                  Submit <SendHorizonal className="h-3 w-3"/>
                 </button>
                 <CountdownTimer targetDate={assignment.submissionDate} />
               </div>
             </div>
           ))
         ) : (
-          <div className=" flex items-center justify-center min-h-[100px] ">
-            <p className=" font-semibold">Nothing Posted Yet!!</p>
-          </div>
+          <NotingPosted/>
         )}
       </div>
     </div>
