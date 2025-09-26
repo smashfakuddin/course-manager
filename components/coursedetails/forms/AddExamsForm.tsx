@@ -54,10 +54,7 @@ export default function AddExamsForm({
 
       {/* Title */}
       <div>
-        <label
-          htmlFor="title"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
+        <label htmlFor="title" className="block mb-2 text-sm font-medium ">
           Assignment Title
         </label>
         <input
@@ -75,7 +72,7 @@ export default function AddExamsForm({
       <div>
         <label
           htmlFor="description"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="block mb-2 text-sm font-medium "
         >
           Description
         </label>
@@ -90,10 +87,7 @@ export default function AddExamsForm({
         />
       </div>
       <div>
-        <label
-          htmlFor="date"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
+        <label htmlFor="date" className="block mb-2 text-sm font-medium ">
           Submission Date
         </label>
         <input
@@ -112,7 +106,7 @@ export default function AddExamsForm({
         />
       </div>
 
-      <button className="btn-main w-full" type="submit">
+      <button className="btn-alt w-full" type="submit">
         Add
       </button>
     </form>

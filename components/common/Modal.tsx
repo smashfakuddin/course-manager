@@ -17,7 +17,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       onClick={onClose} // click outside closes
     >
       <div
-        className="relative w-full max-w-2xl bg-white dark:bg-gray-700 rounded-lg shadow-lg"
+        className="relative w-full max-w-2xl bg-[#00293d] text-[#b4cdfa] rounded-lg shadow-lg"
         onClick={(e) => e.stopPropagation()} // prevent bubbling
       >
         {/* Close Button */}

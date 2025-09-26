@@ -48,7 +48,7 @@ export default function AddResourceForm({
       <div>
         <label
           htmlFor="description"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="block mb-2 text-sm font-medium "
         >
           Description
         </label>
@@ -64,7 +64,7 @@ export default function AddResourceForm({
       <div>
         <label
           htmlFor="url"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="block mb-2 text-sm font-medium "
         >
           Resource Url
         </label>
@@ -78,7 +78,7 @@ export default function AddResourceForm({
         />
       </div>
 
-      <button className="btn-main w-full" type="submit">
+      <button className="btn-alt w-full" type="submit">
         Add
       </button>
     </form>

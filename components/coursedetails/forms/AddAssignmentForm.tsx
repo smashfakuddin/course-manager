@@ -54,7 +54,7 @@ export default function AddAssignmentForm({
       <div>
         <label
           htmlFor="title"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="block mb-2 text-sm font-medium "
         >
           Assignment Title
         </label>
@@ -73,7 +73,7 @@ export default function AddAssignmentForm({
       <div>
         <label
           htmlFor="description"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="block mb-2 text-sm font-medium "
         >
           Description
         </label>
@@ -90,7 +90,7 @@ export default function AddAssignmentForm({
       <div>
         <label
           htmlFor="submissionDate"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          className="block mb-2 text-sm font-medium "
         >
           Submission Date
         </label>
@@ -107,7 +107,7 @@ export default function AddAssignmentForm({
         />
       </div>
 
-      <button className="btn-main w-full" type="submit">
+      <button className="btn-alt w-full" type="submit">
         {isEdit ? "Save Edit" : "Save"}
       </button>
     </form>
