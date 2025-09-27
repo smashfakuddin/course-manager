@@ -61,7 +61,7 @@ export async function getCourseById(courseId) {
       },
     })
     .populate({ path: "assignment" })
-    .populate({ path: "event" })
+    .populate({ path: "event" }).populate({path:'comment'})
     .lean();
 
   if (!courseDocs) {

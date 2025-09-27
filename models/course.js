@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 import Outline from "@/models/outline";
 import Assignment from "@/models/assignment";
 import Exam from "@/models/exams";
-import User from "@/models/user"
+import User from "@/models/user";
+import Comment from "@/models/comment";
 
 const { Schema, model, models } = mongoose;
 
@@ -19,6 +20,7 @@ const courseSchema = new Schema(
     semester: { type: Number, required: true },
     credits: { type: Number, required: true },
     assignment: [{ type: mongoose.Schema.Types.ObjectId, ref: "Assignment" }],
+    comment: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   },
   { timestamps: true }
 );

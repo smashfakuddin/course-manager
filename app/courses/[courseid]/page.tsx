@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import Announcement from "@/components/coursedetails/Announcement";
 import Banner from "@/components/coursedetails/Banner";
+import Comment from "@/components/coursedetails/Comment";
 import Exams from "@/components/coursedetails/Exams";
 import Outline from "@/components/coursedetails/Outline";
 import Overview from "@/components/coursedetails/Overview";
@@ -47,26 +48,7 @@ export default async function CourseIdPage({
             />
           </div>
           {/* Discussion */}
-          <div className="bg-[#00293d] shadow rounded-md p-6">
-            <h2 className="text-xl font-semibold text-[#b4cdfa] mb-4">
-              Discussion
-            </h2>
-            <div className="space-y-4">
-              <div className="border rounded-lg p-3">
-                <p className="font-medium text-white">Student A:</p>
-                <p className="text-white text-sm">
-                  Can someone explain cultural relativism?
-                </p>
-              </div>
-              <textarea
-                placeholder="Write a comment..."
-                className="w-full border rounded-lg p-2 text-sm focus:ring focus:ring-blue-200"
-              />
-              <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                Post Comment
-              </button>
-            </div>
-          </div>
+          <Comment commentBy={session?.user?.name ?? ""} courseId={courseid} comments={courseDetails.comment}/>
         </div>
         <div className="rounded-2xl col-span-1 min-w-[300px] space-y-3">
           {/* Announcements */}
