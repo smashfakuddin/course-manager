@@ -19,9 +19,9 @@ export default function Banner({ courseDetails }: { courseDetails: any }) {
   };
 
   return (
-    <div className=" min-h-[350px] mt-5  overflow-hidden bg-gradient-to-r from-gray-700 via-gray-900 to-black">
+    <div className=" min-h-[350px] mt-5 overflow-hidden ">
       {/* Gradient Overlay */}
-      <div className="bg-gradient-to-t from-black/10 via-black/90 to-transparent">
+      <div className="bg-[#00293d] main-shadow">
         <div className="p-10">
           <div className="bg-white/8 backdrop-blur-lg border border-white/30 rounded-xl p-6 space-y-4 text-black shadow-[0px_4px_6px_0px_rgba(0,_0,_0,_0.1)]">
             <h1 className="text-4xl text-neutral-200 font-bold tracking-tight drop-shadow-md">
