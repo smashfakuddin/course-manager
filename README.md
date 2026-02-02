@@ -126,6 +126,6 @@ course-management/
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/course-management.git
-cd course-management
+git clone https://github.com/smashfakuddin/course-manager
+cd course-manager
 npm install
