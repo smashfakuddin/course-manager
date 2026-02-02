@@ -1,12 +1,12 @@
-# 📚 Course Management System
+# Course Management System
 
 A role-based Course Management System built entirely with **Next.js 14+ App Router**, where teachers can create and manage courses, add structured academic content, and students can access course information — **without any separate backend**.
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 👨‍🏫 Teacher Features
+### Teacher Features
 - Create courses
 - Pick (assign) courses from the available course list
 - Unpick (remove) assigned courses
@@ -18,13 +18,13 @@ A role-based Course Management System built entirely with **Next.js 14+ App Rout
 - Full **CRUD operations** for all course-related content
 - Only assigned teachers can modify course content
 
-### 👩‍🎓 Student Features
+### Student Features
 - View enrolled courses
 - Access course overview and outline
 - View upcoming assignments and events
 - Read course announcements and resources
 
-### 🔐 Authentication & Authorization
+### Authentication & Authorization
 - Role-based authentication:
   - Teacher
   - Student
@@ -35,7 +35,7 @@ A role-based Course Management System built entirely with **Next.js 14+ App Rout
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Next.js 14+ (App Router)**
 - **React Server Components**
@@ -45,42 +45,6 @@ A role-based Course Management System built entirely with **Next.js 14+ App Rout
 - **Tailwind CSS**
 - **NextAuth / Custom Auth (JWT)**
 
----
-
-## 📂 Project Structure
-
-course-management/
-├── app/
-│ ├── (auth)/
-│ ├── (dashboard)/
-│ │ ├── teacher/
-│ │ ├── student/
-│ │ └── admin/
-│ ├── api/
-│ │ ├── auth/
-│ │ ├── courses/
-│ │ └── users/
-│ ├── middleware.ts
-│ └── layout.tsx
-│
-├── lib/
-│ ├── db.ts
-│ ├── auth.ts
-│ └── permissions.ts
-│
-├── models/
-│ ├── User.ts
-│ └── Course.ts
-│
-├── components/
-├── actions/
-│ ├── course.actions.ts
-│ └── auth.actions.ts
-│
-├── README.md
-└── package.json
-
----
 
 ## 🧩 Core Modules
 
